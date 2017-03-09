@@ -4,7 +4,9 @@
   "description": "An Inverted Index app",
   "main": "app/js/app.js",
   "scripts": {
-    "test": "jasmine-node spec/"
+    "test": "jasmine-node spec/",
+    "coverage":"`npm bin`/jasmine-node cover spec/complex-spec.js",
+    "coveralls": "npm run-script coverage && node bin/coveralls.js < coverage/lcov.info"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/andela-oakinwa/inverted-index/issues"
   },
-  "homepage": "https://github.com/andela-oakinwa/inverted-index#readme"
+  "homepage": "https://github.com/andela-oakinwa/inverted-index#readme",
+  "dependencies": {
+    "coveralls": "^2.11.16",
+    "jasmine-node": "^1.14.5"
+  }
 }
