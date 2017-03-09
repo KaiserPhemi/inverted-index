@@ -1,0 +1,19 @@
+{
+  "name": "inverted-index",
+  "version": "1.0.0",
+  "description": "An Inverted Index app",
+  "main": "app/js/app.js",
+  "scripts": {
+    "test": "jasmine-node spec/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andela-oakinwa/inverted-index.git"
+  },
+  "author": "Oluwafemi Akinwa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andela-oakinwa/inverted-index/issues"
+  },
+  "homepage": "https://github.com/andela-oakinwa/inverted-index#readme"
+}
