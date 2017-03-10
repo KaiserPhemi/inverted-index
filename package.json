@@ -5,7 +5,7 @@
   "main": "app/js/app.js",
   "scripts": {
     "test": "jasmine-node spec/",
-    "coverage":"`npm bin`/jasmine-node cover spec/complex-spec.js",
+    "coverage": "`npm bin`/jasmine-node cover spec/complex-spec.js",
     "coveralls": "npm run-script coverage && node bin/coveralls.js < coverage/lcov.info"
   },
   "repository": {
@@ -20,6 +20,8 @@
   "homepage": "https://github.com/andela-oakinwa/inverted-index#readme",
   "dependencies": {
     "coveralls": "^2.11.16",
+    "eslint-config-airbnb-base": "^11.1.1",
+    "g": "^2.0.1",
     "jasmine-node": "^1.14.5"
   }
 }
