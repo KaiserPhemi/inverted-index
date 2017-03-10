@@ -1,4 +1,12 @@
+/**/
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400');
+
 /*Custom CSS*/
+
+html{
+	font-size: 100% !important;
+	font-family: 'Lato', sans-serif;
+}
 body{
 
 }
@@ -7,4 +15,18 @@ div{
 	box-sizing: border-box;
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
+}
+
+/*Logo*/
+.main-logo{
+	border-radius: 50%;
+	width: 70px;
+	padding: 10px;
+}
+
+/*Main page styling*/
+.main-section{
+	background-color: rgb(54,94,219);
+	border-radius: 10px;
+
 }
