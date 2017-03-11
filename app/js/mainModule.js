@@ -1,21 +1,21 @@
-(function(){
+{
 	'use strict';
 
-	/**/
+	/* Declarations */
 	angular.module('invertedIndex', [])
-	.controller('OutputController', OutputController)
+	.controller('TableController', TableController)
 	.controller('FileUploadController', FileUploadController);
 
-	/*Controller handling table generated*/
-	OutputController.$inject = ['$scope'];
-	function OutputController($scope){
+	/* Controller handling table generated */
+	TableController.$inject = ['$scope'];
+	function TableController($scope){
 
-		$scope.name="Femi";
+		$scope.name='';	
 	}
 
-	/*Controller handling file upload*/
+	/* Controller handling file upload */
 	FileUploadController.$inject = ['$scope'];
 	function FileUploadController($scope){
 
 	}
-})();
+}

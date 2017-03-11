@@ -14,7 +14,7 @@
 	<body ng-app="invertedIndex">
 
 		<!--Navigation bar-->
-		<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+		<nav class="navbar navbar-light">
 			
 			<!--Company logo-->
 			<div>
@@ -22,7 +22,7 @@
 			</div>
 
 			<!--Collapsible Navigation link-->
-        	<div class="navbar-header">
+        	<span class="navbar-header">
            		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-links" aria-expanded="false">
 
 	                <!--Creates a Hamburger menu-->
@@ -31,31 +31,28 @@
 	                <span class="icon-bar"></span>
 	                <span class="icon-bar"></span>
             	</button>
-			</div>
+			</span>
 
-			<div id="main-links" class="collapse navbar-collapse navbar-right">
-				<ul class="navbar-nav">
+			<span id="main-links" class="collapse navbar-collapse navbar-right">
+				<ul class="list-unstyled nav navbar-nav navbar-right nav-tran">
 					<li class="nav-item"><a href="#" class="nav-link">About App</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">Help</a></li>
+					<li class="nav-item"><a href="#">Help</a></li>
 				</ul>
-			</div>
+			</span>
 		</nav>
 
 		<!--Main content-->
 		<div class="container main-section" ng-controller="FileUploadController">
 			
-        	<input type="file" class="file-upload form-control" accept=".json" multiple>
+        	<input type="file" class="file-upload" accept=".json" name="files[]" multiple>
         	<button class="create-index">Create Index</button>
 		</div>
 
 		<!--Output area-->
-		<div class="container result-section" ng-controller="OutputController">
-			<input type="text" name="name" ng-model="name">
-			<p>You type : {{name}}</p>
+		<div class="container result-section" ng-controller="TableController">
+			
 		</div>
 
-		<!--Footer of page-->
-		<div></div>
 
 		<!--Shared scripts-->
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
