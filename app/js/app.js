@@ -3,16 +3,29 @@
 	class InvertedIndex{
 
 		/* Class Constructor */
-		constructor(fileName){
+		constructor(indices){
+			
 			this.fileName = fileName;
-
 		}
 
 		/* Reads the data from the file being uploaded */
 		readFile(){
 
 			let fileContent = document.getElementsByClassName('file-upload');
-			
+			fileContent.addEventListener('change', event => {
+
+    			// When the control has changed, there are new files
+				let i = 0,
+        			files = fileContent.files,
+        			len = files.length;
+
+    			for (; i < len; i++) {
+        			console.log("Filename: " + files[i].name);
+        			console.log("Type: " + files[i].type);
+        			console.log("Size: " + files[i].size + " bytes");
+    			}
+			}, false);
+		}
 
 		/* Ensures all the documents in a particular file is valid */
 		validateFile(){}
@@ -32,9 +45,13 @@
 			});
 		}
 
-		createCleanJSON(fileProp){
+		createText(text){
 
-			return
+			return text
+					.toLowerCase()
+					.replace()
+					.split();
+
 		}
 
 		/* Get’s indices created for particular files */
