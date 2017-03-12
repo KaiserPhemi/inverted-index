@@ -1,5 +1,4 @@
 {
-	'use strict';
 
 	/* Declarations */
 	angular.module('invertedIndex', [])

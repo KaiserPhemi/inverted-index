@@ -1,11 +1,22 @@
 {
-	'use strict';
 
 	class InvertedIndex{
+
+		/* Class Constructor */
+		constructor(fileName){
+			this.fileName = fileName;
+
+		}
 
 		/* Reads the data from the file being uploaded */
 		readFile(){
 
+			let fileContent = readFile('.json');
+			fileContent.then((content) => {
+				// Content of JSON file
+			}, (err) => {
+				// Error message if error is encountered
+			});
 		}
 
 		/* Ensures all the documents in a particular file is valid */
