@@ -11,13 +11,8 @@
 		/* Reads the data from the file being uploaded */
 		readFile(){
 
-			let fileContent = readFile('.json');
-			fileContent.then((content) => {
-				// Content of JSON file
-			}, (err) => {
-				// Error message if error is encountered
-			});
-		}
+			let fileContent = document.getElementsByClassName('file-upload');
+			
 
 		/* Ensures all the documents in a particular file is valid */
 		validateFile(){}

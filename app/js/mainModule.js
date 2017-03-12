@@ -9,7 +9,7 @@
 	TableController.$inject = ['$scope'];
 	function TableController($scope){
 
-		$scope.name='';	
+		$scope.table='';	
 	}
 
 	/* Controller handling file upload */
