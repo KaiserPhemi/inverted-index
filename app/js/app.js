@@ -45,12 +45,13 @@
 			});
 		}
 
+		/* Creates a clean text from JSON */
 		createText(text){
 
 			return text
 					.toLowerCase()
-					.replace()
-					.split();
+					.replace(/[^\w\s]/g, '')
+					.split(/\s+/); // Converts to an array.
 
 		}
 
