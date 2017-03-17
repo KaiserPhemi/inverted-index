@@ -7,7 +7,7 @@
 		  port 		= 7000; 
 
 	app.get('*', (request, response) => {
-	    response.sendFile(path.join(__dirname, 'app/index.html'));
+	    response.sendFile(path.join(__dirname, 'lib/index.html'));
 	});
 
 	/* Listening on port */

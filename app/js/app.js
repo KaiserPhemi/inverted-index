@@ -28,7 +28,17 @@
 		}
 
 		/* Ensures all the documents in a particular file is valid */
-		validateFile(){}
+		validateFile(body){
+			try {
+				const data = JSON.parse(body);
+    				// if came to here, then valid
+    				return data;
+  			}
+  			catch(err){
+    				// failed to parse
+    		return null;
+  			}
+		}
 		
 		/* Strips out special characters from documents to be indexed */
 		tokenize(){}
