@@ -4,20 +4,63 @@
 	<!--Contains page data and links-->
 	<head>
 		<meta charset="utf-8">
-		<title>A Inverted Index App</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>An Inverted Index App</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/index.css">
 	</head>
 	
 	<!--Visible part of page-->
-	<body>
+	<body ng-app="invertedIndex">
 
 		<!--Navigation bar-->
-		<div></div>
+		<nav class="navbar nav">
+			
+			<!--Company logo-->
+			<span>
+				<a href="index.html"><img src="img/andela-logo.png" class="main-logo img-responsive brand brand-name"></a>
+			</span>
+
+			<!--Page Heading-->
+			<span>
+				<h1>Inverted Index App</h1>
+			</span>
+
+			<!--Search Box-->
+			<span class="left">
+				<input type="search" name="search-box">
+			</span>
+
+		</nav>
+
+		<!--App Info-->
+		<div class="col-md-4 right">
+			<h2>About App</h2>
+			<p>This app builds an index from books in a file and allows you search through the file for words in that book
+			</p>
+		</div>
 
 		<!--Main content-->
-		<div></div>
+		<div class="container main-section col-md-8" ng-controller="FileUploadController">
+			
+        	<input type="file" class="file-upload" accept=".json" name="json-files" multiple>
+        	<button class="create-index" onclick="readFile()">Create Index</button>
+		</div>
 
-		<!--Footer of page-->
-		<div></div>
+		<!--Output area-->
+		<div class="container result-section" ng-controller="TableController">
+			
+		</div>
+
+
+		<!--Shared scripts-->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.2/angular-route.js"></script>
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+		<!--Custom scripts-->
+		<script src="js/app.js"></script>
+		<script src="js/mainModule.js"></script>
 	</body>
 </html>
