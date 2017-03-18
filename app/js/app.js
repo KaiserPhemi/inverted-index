@@ -30,9 +30,22 @@
 		/* Ensures all the documents in a particular file is valid */
 		validateFile(file){
 			this.file = file;
-			let checkFile = true;
-			try{}
+			let checkField,
+				isValid = true;
+			try{
+				const parsedJSON = JSON.parse(JSON.stringify(this.file));
+				isValid = (parsedJSON.length === 0) ? false : checkField;
+				
+				checkField = parsedJSON.forEach((key) => {
+					isValid = (typeof key.title !== 'string' || typeof key.text !== 'string') ? false : true;
+				});
+			}
+			catch(error){
+				isValid = false;
+			}
+			return isValid;
 		}
+
 		
 		/* Strips out special characters from documents to be indexed */
 		tokenize(text){
