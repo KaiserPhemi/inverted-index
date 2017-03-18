@@ -6,7 +6,7 @@
 		  app 		= express(),
 		  port 		= 7000; 
 
-	app.get('*', (request, response) => {
+	app.get('/', (request, response) => {
 	    response.sendFile(path.join(__dirname, 'app/index.html'));
 	});
 
