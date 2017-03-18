@@ -28,13 +28,22 @@
 		}
 
 		/* Ensures all the documents in a particular file is valid */
-		validateFile(){}
+		validateFile(file){
+			this.file = file;
+			let checkFile = true;
+			try{}
+		}
 		
 		/* Strips out special characters from documents to be indexed */
-		tokenize(){}
+		tokenize(text){
+			this.text = text;
+			return this.text
+					.toLowerCase()				// Converts text to lower case
+					.replace(/[^\w\s]/g, '');	// Removes any non-word character e.g. dot
+		}
 		
 		/* Creates the index for documents */
-		createIndex(file, fileName){
+		createIndex(name, content){
 			let tokens = [];
 
 			const cleanTitle = file.title.replace(/[^w+/d]/g,'');
@@ -45,15 +54,16 @@
 			});
 		}
 
-		/* Creates a clean text from JSON */
-		createText(text){
+		/* Creates a clean text from content */
+		// normalizeText(text){
+		// 	this.text = text;
 
-			return text
-					.toLowerCase() // Converts text to lower case
-					.replace(/[^\w\s]/g, '') // Removes any non-word character
-					.split(/\s+/); // Converts to an array.
-
-		}
+		// 	return this.text
+		// 			.toLowerCase() 
+		// 			.replace(/[^\w\s]/g, '') 
+		// 			.split(/\s+/) 
+		// 			.sort(); 
+		// }
 
 		/* Get’s indices created for particular files */
 		getIndex(){}
