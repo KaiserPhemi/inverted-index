@@ -49,8 +49,8 @@
 		createText(text){
 
 			return text
-					.toLowerCase()
-					.replace(/[^\w\s]/g, '')
+					.toLowerCase() // Converts text to lower case
+					.replace(/[^\w\s]/g, '') // Removes any non-word character
 					.split(/\s+/); // Converts to an array.
 
 		}
