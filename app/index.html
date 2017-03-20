@@ -15,30 +15,39 @@
 	<body ng-app="invertedIndex">
 
 		<!--Navigation bar-->
-		<nav class="navbar nav">
+		<div class="navbar nav main-nav">
 
-			<!--Page Heading-->
+			<!--Page logo-->
 			<span>
-				<h2>Inverted Index App</h2>
+				<a href="index.html"><img src="img/inv-ind.jpg" class="brand logo img-responsive"></a>
+			</span>
+			
+			<!--Page heading-->
+			<span>
+				<h2 class="page-heading">Inverted Index App</h2>
 			</span>
 
-			<!--Search Box-->
-			<span class="pull-right">
-				<input type="search" name="search-box">
-			</span>
-		</nav>
+			<div class="pull-right">
+				<!--Search Box-->
+				<form class="search-form" action="">
+					<input class="search" type="text" placeholder="Type here">
+					<input class="submit" type="submit" value="Search">
+				</form>
+
+				<!--Navigation-->
+				<div class="main-links">
+					<ul class="nav navbar-nav pull-right">
+					  <li class="list-items"><a href="#">About App</a></li>
+					  <li class="list-items"><a href="#">Help</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 
 		<div class="row">
-			<!--App Info-->
-			<div class="col-md-4 right">
-				<h3>About App</h3>
-				<hr>
-				<p>This app builds an index from books in a file and allows you search through the file for words in that book
-				</p>
-			</div>
-
+			
 			<!--Main content-->
-			<div class="container main-section col-md-8" ng-controller="FileUploadController">
+			<div class="container main-section" ng-controller="FileUploadController">
 				
 	        	<input type="file" class="file-upload" accept=".json" name="json-files" multiple>
 	        	<button class="create-index" onclick="createIndex()">Create Index</button>
@@ -58,5 +67,6 @@
 		<!--Custom scripts-->
 		<script src="js/app.js"></script>
 		<script src="js/mainModule.js"></script>
+
 	</body>
 </html>
