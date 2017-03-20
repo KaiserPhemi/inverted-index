@@ -1,5 +1,5 @@
 {
-	const test = require('..app/js/app.js');
+	const test = require('../app/js/app.js');
 
 	describe('Checks for input', () => {
   		it('', () => {
