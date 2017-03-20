@@ -48,7 +48,8 @@
 			this.text = text;
 			return this.text
 					.toLowerCase()				// Converts text to lower case
-					.replace(/[^\w\s]/g, '');	// Removes any non-word character e.g. dot
+					.replace(/[^\w\s]/g, '')	// Removes any non-word character e.g. dot
+					.split(/\s+/);				// Turns it into an array
 		}
 		
 		/* Creates the index for documents */
@@ -59,6 +60,7 @@
 			tokens.forEach(() => {
 
 			});
+			return this.allIndices[fileName];
 		}
 
 		/* Get’s indices created for particular files */
@@ -68,7 +70,7 @@
 		}
 
 		/* Searches through one or more indices for words */
-		searchIndex(fileName, ...queries){
+		searchIndex(fileName, query){
 			let searchList = {};
 			queries.forEach((query) => {
 				if (query in this.allIndices[fileName]) {
