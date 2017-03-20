@@ -1,30 +1,28 @@
 {
-
 	class InvertedIndex{
 
 		/* Class Constructor */
-		constructor(indices){
-			
-			this.fileName = fileName;
+		constructor(){
+			this.indices = {};
 		}
 
 		/* Reads the data from the file being uploaded */
 		readFile(){
+			// this.book = book;
+			let documentList = [],
+				uploadedDoc = document.getElementsByClassName('file-upload');
 
-			let fileContent = document.getElementsByClassName('file-upload');
-			fileContent.addEventListener('change', event => {
-
-    			// When the control has changed, there are new files
-				let i = 0,
-        			files = fileContent.files,
-        			len = files.length;
-
-    			for (; i < len; i++) {
-        			console.log("Filename: " + files[i].name);
-        			console.log("Type: " + files[i].type);
-        			console.log("Size: " + files[i].size + " bytes");
-    			}
-			}, false);
+			uploadedDoc.addEventListener('change', () => {
+				Array.prototype.forEach.call(uploadedDoc.files, (file) =>{
+					let reader = new FileReader();
+					reader.addEventListener('load', () =>{
+						documentList.push(file);
+					});
+					reader.readAsText(file);
+				});
+			});
+			console.log(documentList);
+			return documentList;
 		}
 
 		/* Ensures all the documents in a particular file is valid */
@@ -45,7 +43,6 @@
 			}
 			return isValid;
 		}
-
 		
 		/* Strips out special characters from documents to be indexed */
 		tokenize(text){
@@ -59,30 +56,17 @@
 		createIndex(name, content){
 			let tokens = [];
 
-			const cleanTitle = file.title.replace(/[^w+/d]/g,'');
-			const cleanText = file.text.replace(/[^w+/d]/g,'');
-
 			tokens.forEach(() => {
 
 			});
 		}
 
-		/* Creates a clean text from content */
-		// normalizeText(text){
-		// 	this.text = text;
-
-		// 	return this.text
-		// 			.toLowerCase() 
-		// 			.replace(/[^\w\s]/g, '') 
-		// 			.split(/\s+/) 
-		// 			.sort(); 
-		// }
-
 		/* Get’s indices created for particular files */
 		getIndex(){}
 
 		/* Searches through one or more indices for words */
-		searchIndex(){}
+		searchIndex(fileName, ...terms){
 
+		}
 	}
 }
