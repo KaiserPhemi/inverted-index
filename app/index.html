@@ -41,46 +41,17 @@
 			<div class="container main-section col-md-8" ng-controller="FileUploadController">
 				
 	        	<input type="file" class="file-upload" accept=".json" name="json-files" multiple>
-	        	<button class="create-index" onclick="readFile()">Create Index</button>
+	        	<button class="create-index" onclick="createIndex()">Create Index</button>
 			</div>
 		</div>
 
 		<!--Output area-->
-		<div class="container result-section" ng-controller="TableController">
+		<div class="container result-section" ng-controller='TableController'>
 			
 		</div>
 
-		<!--Page Footer-->
-		<footer class="footer">
-  			
-		    <div class="container">
-		    	<div class="row">
-		        
-		        	<div class="col-md-6 col-md-offset-3">
-		          <h3 class="h4 type-npm-pastel-3">About App</h3>
-		          <hr class="divider-1">
-		        	</div>
-		  
-		        	<div class="col-md-6 col-md-offset-1">
-		          <h3 class="h4 type-npm-pastel-3">FAQ</h3>
-		          <hr class="divider-1">
-		        	</div>
-		  
-		        	<div class="col-md-6 col-md-offset-1">
-		          <h3 class="h4 type-npm-pastel-3">Legal Stuff</h3>
-		          <hr class="divider-1">
-		       		</div>
-		    	</div>
-		    </div>
-		    
-		    <div class="txt-c container">
-		    </div>
-  		</footer>
-
-
 		<!--Shared scripts-->
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.2/angular-route.js"></script>
+		<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js'></script>
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
