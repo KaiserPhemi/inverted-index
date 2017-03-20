@@ -1,0 +1,13 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Optional npm cache directory
+.npm
+
+# Host(macOS) file system essentials
+.DS_Store
+
+# Environment variables
+.env
