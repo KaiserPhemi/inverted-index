@@ -26,6 +26,7 @@
 
 		/* Ensures all the documents in a particular file is valid */
 <<<<<<< HEAD
+<<<<<<< HEAD
 		validateFile(file){
 			this.file = file;
 			let checkField,
@@ -43,6 +44,8 @@
 			}
 			return isValid;
 =======
+=======
+>>>>>>> e0d1b649ed9beb3cbf30b8676d9ec0bd9eff3669
 		validateFile(body){
 			try {
 				const data = JSON.parse(body);
@@ -53,7 +56,10 @@
     				// failed to parse
     		return null;
   			}
+<<<<<<< HEAD
 >>>>>>> node modules installed
+=======
+>>>>>>> e0d1b649ed9beb3cbf30b8676d9ec0bd9eff3669
 		}
 		
 		/* Strips out special characters from documents to be indexed */

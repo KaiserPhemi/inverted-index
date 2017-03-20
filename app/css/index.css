@@ -1,9 +1,14 @@
 /* Font import */
 @import url('https://fonts.googleapis.com/css?family=Oxygen:400,700');
+<<<<<<< HEAD
+=======
+
+>>>>>>> e0d1b649ed9beb3cbf30b8676d9ec0bd9eff3669
 
 
 /* Default styling for the whole page */
 html, body{
+<<<<<<< HEAD
 <<<<<<< HEAD
 	font-family: 'Lato', sans-serif;
 	width: 100%;
@@ -14,6 +19,10 @@ html, body{
 	font-size: 100%;
 	font-family: 'Oxygen', sans-serif;
 >>>>>>> node modules installed
+=======
+	font-size: 100%;
+	font-family: 'Oxygen', sans-serif;
+>>>>>>> e0d1b649ed9beb3cbf30b8676d9ec0bd9eff3669
  }
 
 /* Default for all divs */
@@ -28,6 +37,7 @@ a{
 	text-decoration: none;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* Navigation bar */
 .main-nav{
@@ -48,6 +58,8 @@ a{
 }
 
 =======
+=======
+>>>>>>> e0d1b649ed9beb3cbf30b8676d9ec0bd9eff3669
 .main-nav{
 	background-color: rgba(54,97,100,0.45);
 }
@@ -69,7 +81,10 @@ a{
 	float: right;
 	position: all;
 }
+<<<<<<< HEAD
 >>>>>>> node modules installed
+=======
+>>>>>>> e0d1b649ed9beb3cbf30b8676d9ec0bd9eff3669
 
 /* Logo */
 .logo{
@@ -121,10 +136,14 @@ a{
 /* Main page styling */
 .main-section{
 <<<<<<< HEAD
+<<<<<<< HEAD
 	background-color: rgb(32,124,202);
 =======
 	background-color: rgba(54,97,100,0.45);
 >>>>>>> node modules installed
+=======
+	background-color: rgba(54,97,100,0.45);
+>>>>>>> e0d1b649ed9beb3cbf30b8676d9ec0bd9eff3669
 	border-radius: 10px;
 	padding: 10px;
 	width: 70%;

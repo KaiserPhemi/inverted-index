@@ -5,10 +5,14 @@
   "main": "app/js/app.js",
   "scripts": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "start": "node node_modules/gulp/bin/gulp",
 =======
     "start": "node server.js",
 >>>>>>> node modules installed
+=======
+    "start": "node server.js",
+>>>>>>> e0d1b649ed9beb3cbf30b8676d9ec0bd9eff3669
     "test": "jasmine-node spec/",
     "coverage": "`npm bin`/jasmine-node cover spec/complex-spec.js",
     "coveralls": "npm run-script coverage && node bin/coveralls.js < coverage/lcov.info"
