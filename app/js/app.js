@@ -7,17 +7,15 @@
 		}
 
 		/* Reads the data from the file being uploaded */
-		readFile(){
-			// this.book = book;
-			let documentList = [],
-				uploadedDoc = document.getElementsByClassName('file-upload');
-
+		readFile(file){
+			let uploadedDoc = document.getElementsByClassName('file-upload');
 			uploadedDoc.addEventListener('change', () => {
 				Array.prototype.forEach.call(uploadedDoc.files, (file) =>{
 					let reader = new FileReader();
 					reader.addEventListener('load', () =>{
-						if (this.) {}
-						documentList.push(file);
+						if (this.validateFile(file)) {
+							this.allIndices[fileName] = file; 
+						}
 					});
 					reader.readAsText(file);
 				});
@@ -55,6 +53,7 @@
 		
 		/* Creates the index for documents */
 		createIndex(fileName, content){
+			let fileIndex = {}
 			let tokens = [];
 
 			tokens.forEach(() => {
