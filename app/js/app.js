@@ -68,8 +68,16 @@
 		}
 
 		/* Searches through one or more indices for words */
-		searchIndex(fileName, ...terms){
-
+		searchIndex(fileName, ...queries){
+			let searchList = {};
+			queries.forEach((query) => {
+				if (query in this.allIndices[fileName]) {
+					searchList[query] = this.allIndices[fileName][query];
+				}
+				else{
+					
+				}
+			});
 		}
 	}
 }
