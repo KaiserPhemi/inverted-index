@@ -6,8 +6,13 @@
 		  app 		= express(),
 		  port 		= 7000; 
 
+<<<<<<< HEAD
 	app.get('/', (request, response) => {
 	    response.sendFile(path.join(__dirname, 'app/index.html'));
+=======
+	app.get('*', (request, response) => {
+	    response.sendFile(path.join(__dirname, 'lib/index.html'));
+>>>>>>> node modules installed
 	});
 
 	/* Listening on port */

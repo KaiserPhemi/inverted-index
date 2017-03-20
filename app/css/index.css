@@ -1,13 +1,19 @@
 /* Font import */
-@import url('https://fonts.googleapis.com/css?family=Lato:300,400');
+@import url('https://fonts.googleapis.com/css?family=Oxygen:400,700');
+
 
 /* Default styling for the whole page */
 html, body{
+<<<<<<< HEAD
 	font-family: 'Lato', sans-serif;
 	width: 100%;
   	height: 100%;
   	padding: 0px;
   	margin: 0px;
+=======
+	font-size: 100%;
+	font-family: 'Oxygen', sans-serif;
+>>>>>>> node modules installed
  }
 
 /* Default for all divs */
@@ -22,6 +28,7 @@ a{
 	text-decoration: none;
 }
 
+<<<<<<< HEAD
 /* Navigation bar */
 .main-nav{
 	background-color: rgb(240,240,240);
@@ -40,6 +47,29 @@ a{
 	margin-top: 15px;
 }
 
+=======
+.main-nav{
+	background-color: rgba(54,97,100,0.45);
+}
+
+.main-heading{
+	display: inline-block;
+	float: left;
+}
+.header{
+	float: left;
+}
+
+.search-bar{
+	display: inline;
+	float: right;
+}
+
+.create-index{
+	float: right;
+	position: all;
+}
+>>>>>>> node modules installed
 
 /* Logo */
 .logo{
@@ -90,7 +120,11 @@ a{
 
 /* Main page styling */
 .main-section{
+<<<<<<< HEAD
 	background-color: rgb(32,124,202);
+=======
+	background-color: rgba(54,97,100,0.45);
+>>>>>>> node modules installed
 	border-radius: 10px;
 	padding: 10px;
 	width: 70%;

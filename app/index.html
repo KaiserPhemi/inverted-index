@@ -15,6 +15,7 @@
 	<body ng-app="invertedIndex">
 
 		<!--Navigation bar-->
+<<<<<<< HEAD
 		<div class="navbar nav main-nav">
 
 			<!--Page logo-->
@@ -42,11 +43,32 @@
 					</ul>
 				</div>
 			</div>
+=======
+		<nav class="navbar nav main-nav">
+			
+			<!--Page Heading-->
+			<span class="text-center main-heading">
+				<h2>Inverted Index App</h2>
+			</span>
+
+			<!--Search Box-->
+			<span class="pull-right search-bar">
+				<input type="search" name="search-box">
+			</span>
+		</nav>
+
+		<!--App Info-->
+		<div class="col-md-4 header">
+			<h3>About App</h3>
+			<p>This app builds an index from books in a file and allows you search through the file for words in that book
+			</p>
+>>>>>>> node modules installed
 		</div>
 
 		<div class="row">
 			
 			
+<<<<<<< HEAD
 			<!--Main content-->
 			<div class="container main-section" ng-controller="FileUploadController">
 				<input type="file" class="file-upload btn" accept=".json" name="json-files" multiple>
@@ -56,6 +78,15 @@
 
 		<!--Output area-->
 		<div class="container result-section" ng-controller='TableController'>
+=======
+        	<input type="file" class="file-upload" accept=".json" name="json-files" multiple>
+        	<button class="create-index btn" onclick="readFile()">Create Index</button>
+		</div>
+
+		<!--Output area-->
+		<div class="container result-section" ng-controller="TableController">
+		<p>This is me</p>
+>>>>>>> node modules installed
 			
 		</div>
 

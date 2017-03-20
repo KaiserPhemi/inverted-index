@@ -4,7 +4,11 @@
   "description": "An Inverted Index app",
   "main": "app/js/app.js",
   "scripts": {
+<<<<<<< HEAD
     "start": "node node_modules/gulp/bin/gulp",
+=======
+    "start": "node server.js",
+>>>>>>> node modules installed
     "test": "jasmine-node spec/",
     "coverage": "`npm bin`/jasmine-node cover spec/complex-spec.js",
     "coveralls": "npm run-script coverage && node bin/coveralls.js < coverage/lcov.info"
@@ -30,9 +34,11 @@
   },
   "devDependencies": {
     "browser-sync": "^2.18.8",
+    "dotenv": "^4.0.0",
     "eslint": "^3.17.1",
     "eslint-config-airbnb-base": "^11.1.1",
     "eslint-plugin-import": "^2.2.0",
+    "express": "^4.15.2",
     "gulp": "^3.9.1",
     "gulp-uglify": "^2.1.0",
     "gulp-util": "^3.0.8",
