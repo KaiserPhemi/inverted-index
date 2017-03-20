@@ -3,7 +3,7 @@
 
 		/* Class Constructor */
 		constructor(){
-			this.indices = {};
+			this.allIndices = {};
 		}
 
 		/* Reads the data from the file being uploaded */
@@ -16,6 +16,7 @@
 				Array.prototype.forEach.call(uploadedDoc.files, (file) =>{
 					let reader = new FileReader();
 					reader.addEventListener('load', () =>{
+						if (this.) {}
 						documentList.push(file);
 					});
 					reader.readAsText(file);
@@ -53,7 +54,7 @@
 		}
 		
 		/* Creates the index for documents */
-		createIndex(name, content){
+		createIndex(fileName, content){
 			let tokens = [];
 
 			tokens.forEach(() => {
@@ -62,7 +63,10 @@
 		}
 
 		/* Get’s indices created for particular files */
-		getIndex(){}
+		getIndex(fileName){
+
+			return this.allIndices[fileName];
+		}
 
 		/* Searches through one or more indices for words */
 		searchIndex(fileName, ...terms){
