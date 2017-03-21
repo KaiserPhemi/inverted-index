@@ -17,19 +17,6 @@
 			.on('change', sync.reload());
 	});
 
-	/* Task to minify all javascript files */
-	/*gulp.task('js', () =>{
-		return gulp.src('app/js/*.js')
-					.pipe(minify())
-					.pipe(gulp.dest('lib'));
-	});*/
-
-	/* Adds html files to the mninification  */
-	/*gulp.task('html', () =>{
-		return gulp.src('app/*.html')
-					.pipe(gulp.dest('lib'));
-	});*/
-
 	/* Create a task to watch for file changes */
 	gulp.task('sync', () => {
 		sync.init({
