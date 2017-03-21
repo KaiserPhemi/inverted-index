@@ -3,6 +3,7 @@
 
 		/* Class Constructor */
 		constructor(){
+
 			this.allIndices = {};
 		}
 
@@ -49,16 +50,28 @@
 			return this.text
 					.toLowerCase()				// Converts text to lower case
 					.replace(/[^\w\s]/g, '')	// Removes any non-word character e.g. dot
-					.split(/\s+/);				// Turns it into an array
+					.split(/\s+/)
+					.sort();				// Turns it into an array
 		}
 		
 		/* Creates the index for documents */
 		createIndex(fileName, content){
-			let fileIndex = {}
-			let tokens = [];
+			const fileIndex = {};
 
-			tokens.forEach(() => {
+			content.forEach((objDoc, index) =>{
+				for(const key in objDoc) {
+					const tokens = this.tokenize(objDoc[key]);
 
+					tokens.forEach((badge) => {
+						if (fileIndex[badge]){								// Badge exist in fileIndex
+							if (fileIndex[badge].indexOf(index) === -1) {	// Checks for unique index
+								fileIndex[badge].push(index);
+							}
+						} else{
+							fileIndex[badge] = [index];
+						}
+					});
+				}
 			});
 			return this.allIndices[fileName];
 		}
@@ -77,9 +90,13 @@
 					searchList[query] = this.allIndices[fileName][query];
 				}
 				else{
-					
+					searchList[query] = this.allIndices[fileName]['Match not found'];
 				}
 			});
+			return searchList;
 		}
 	}
+
+	/* App exported as Node package */
+	module.exports = InvertedIndex;
 }
