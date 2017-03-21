@@ -9,12 +9,16 @@
 	TableController.$inject = ['$scope'];
 	function TableController($scope){
 
-		$scope.table='';	
+		$scope.table='';
 	}
 
 	/* Controller handling file upload */
 	FileUploadController.$inject = ['$scope'];
 	function FileUploadController($scope){
-
+		
+		$scope.uploads = (upload) => {
+			console.log(uploads);
+		}
+		$scope.createIndex = () => {};
 	}
 }
