@@ -1,31 +1,34 @@
 {
+	/**
+	 * /
+	 */
 	class InvertedIndex{
 
-		/* Class Constructor */
+		/** Class Constructor 
+		* @constructor
+		*/
 		constructor(){
-
 			this.allIndices = {};
 		}
 
-		/* Reads the data from the file being uploaded */
-		readFile(file){
-			let uploadedDoc = document.getElementsByClassName('file-upload');
-			uploadedDoc.addEventListener('change', () => {
-				Array.prototype.forEach.call(uploadedDoc.files, (file) =>{
-					let reader = new FileReader();
-					reader.addEventListener('load', () =>{
-						if (this.validateFile(file)) {
-							this.allIndices[fileName] = file; 
-						}
-					});
-					reader.readAsText(file);
-				});
-			});
-			console.log(documentList);
-			return documentList;
+		/** 
+		 * Reads the data from the file being uploaded
+		 * @param  {File} file - Uploaded file to be read.
+		 * @return {void}
+		 */
+ 		readFile(file){
+			let reader = new FileReader();
+				reader.onload = (ev) => {
+					let uploadedJSON = reader.result;
+				}
+				reader.readAsText(file);
 		}
 
-		/* Ensures all the documents in a particular file is valid */
+		/**
+		 * Ensures all the documents in a particular file is valid
+		 * @param  {Object} file
+		 * @return {Boolean} isValid -True or false
+		 */
 		validateFile(file){
 			this.file = file;
 			let checkField,
@@ -44,17 +47,27 @@
 			return isValid;
 		}
 		
-		/* Strips out special characters from documents to be indexed */
-		tokenize(text){
-			this.text = text;
-			return this.text
-					.toLowerCase()				// Converts text to lower case
-					.replace(/[^\w\s]/g, '')	// Removes any non-word character e.g. dot
-					.split(/\s+/)
-					.sort();				// Turns it into an array
+		/** 
+		 * Strips out special characters from documents to be indexed
+		 * @param  {String} fileText - String from file to be tokenized
+		 * @return {Array} -An array of unique words
+		 */
+		tokenize(fileText){
+			this.text = fileText;
+			return [...new Set(this.text
+								.toLowerCase()				// Converts text to lower case
+								.replace(/[^\w\s]/g, '')	// Removes any non-word character e.g. dot
+								.split(/\s+/)				// Turns it into an array
+								.sort()						// Sorts array
+			)];
 		}
 		
-		/* Creates the index for documents */
+		/**
+		 * Creates the index for documents
+		 * @param  {[]}
+		 * @param  {[type]}
+		 * @return {[type]}
+		 */
 		createIndex(fileName, content){
 			const fileIndex = {};
 
@@ -73,30 +86,40 @@
 					});
 				}
 			});
+			this.allIndices[fileName] = {words:fileIndex, count:content.length};
 			return this.allIndices[fileName];
 		}
 
-		/* Get’s indices created for particular files */
+		/** Get’s indices created for particular files */
 		getIndex(fileName){
 
 			return this.allIndices[fileName];
 		}
 
-		/* Searches through one or more indices for words */
+		/** Searches through one or more indices for words */
 		searchIndex(fileName, query){
-			let searchList = {};
-			queries.forEach((query) => {
-				if (query in this.allIndices[fileName]) {
-					searchList[query] = this.allIndices[fileName][query];
-				}
-				else{
-					searchList[query] = this.allIndices[fileName]['Match not found'];
+			const queryTokens = this.tokenize(query),
+				  index 	  = this.getIndex(fileName);
+			
+			if (!index) {
+				return `Index with ${fileName} does not exist`;
+			}
+
+			let searchResult = {
+				words:{},
+				docCount: index.docCount
+			};
+
+			queryTokens.forEach((token) => {
+				if (index.words[token]) {
+					searchResult.words[token] = index.words[tokens];
 				}
 			});
-			return searchList;
+
+			return Object.keys(searchResult.words).length > 0 ? searchResult : 'No word found';
 		}
 	}
 
-	/* App exported as Node package */
-	module.exports = InvertedIndex;
+	/** App exported as Node package */
+	/*module.exports = InvertedIndex;*/
 }
