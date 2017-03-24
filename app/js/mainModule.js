@@ -1,24 +1,23 @@
 {
+	/** Declarations */
+	angular.module('mainApp', [])
+	.controller('MainController', MainController);
 
-	/* Declarations */
-	angular.module('invertedIndex', [])
-	.controller('TableController', TableController)
-	.controller('FileUploadController', FileUploadController);
-
-	/* Controller handling table generated */
-	TableController.$inject = ['$scope'];
-	function TableController($scope){
-
-		$scope.table='';
-	}
-
-	/* Controller handling file upload */
-	FileUploadController.$inject = ['$scope'];
-	function FileUploadController($scope){
+	/** Controller handling file upload */
+	MainController.$inject = ['$scope'];
+	function MainController($scope){
 		
+		/** Instance of class created */
+		const invIndex = new InvertedIndex();
+
+		/**
+		 * Handles file uploads.
+		 * @param  {[type]}
+		 * @return {[type]}
+		 */
 		$scope.uploads = (upload) => {
 			console.log(uploads);
 		}
-		$scope.createIndex = () => {};
+		
 	}
 }
