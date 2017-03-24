@@ -1,20 +1,21 @@
 {
-	/**
-	 * /
+	/** 
+	 * 
 	 */
 	class InvertedIndex{
 
-		/** Class Constructor 
-		* @constructor
-		*/
+		/** 
+		 * Class Constructor
+		 * @constructor
+		 */
 		constructor(){
 			this.allIndices = {};
 		}
 
 		/** 
 		 * Reads the data from the file being uploaded
-		 * @param  {File} file - Uploaded file to be read.
-		 * @return {void}
+		 * @param  {[File]} file - Uploaded file to be read.
+		 * @return {[void]}
 		 */
  		readFile(file){
 			let reader = new FileReader();
@@ -26,8 +27,8 @@
 
 		/**
 		 * Ensures all the documents in a particular file is valid
-		 * @param  {Object} file
-		 * @return {Boolean} isValid -True or false
+		 * @param  {[Object]} file
+		 * @return {[Boolean]} isValid -True or false
 		 */
 		validateFile(file){
 			this.file = file;
@@ -49,8 +50,8 @@
 		
 		/** 
 		 * Strips out special characters from documents to be indexed
-		 * @param  {String} fileText - String from file to be tokenized
-		 * @return {Array} -An array of unique words
+		 * @param  {[String]} fileText - String from file to be tokenized
+		 * @return {[Array]} -An array of unique words
 		 */
 		tokenize(fileText){
 			this.text = fileText;
@@ -64,8 +65,8 @@
 		
 		/**
 		 * Creates the index for documents
+		 * @param  {[String]}
 		 * @param  {[]}
-		 * @param  {[type]}
 		 * @return {[type]}
 		 */
 		createIndex(fileName, content){
@@ -90,13 +91,22 @@
 			return this.allIndices[fileName];
 		}
 
-		/** Get’s indices created for particular files */
+		/**
+		 * Get’s indices created for particular files
+		 * @param  {[type]}
+		 * @return {[type]}
+		 */
 		getIndex(fileName){
 
 			return this.allIndices[fileName];
 		}
 
-		/** Searches through one or more indices for words */
+		/**
+		 * Searches through one or more indices for words 
+		 * @param  {[]]}
+		 * @param  {[String]} query -Input token
+		 * @return {[type]}
+		 */
 		searchIndex(fileName, query){
 			const queryTokens = this.tokenize(query),
 				  index 	  = this.getIndex(fileName);
@@ -121,5 +131,5 @@
 	}
 
 	/** App exported as Node package */
-	/*module.exports = InvertedIndex;*/
+	module.exports = InvertedIndex;
 }
