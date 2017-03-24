@@ -24,11 +24,12 @@ a{
 
 /* Navigation bar */
 .main-nav{
-	background-color: rgb(240,240,240);
+	background-color: rgba(32,124,202,0.2);
 	height: 60px;
 	-webkit-box-shadow: -2px 10px 5px -7px rgba(0,0,0,0.75);
     -moz-box-shadow: -2px 10px 5px -7px rgba(0,0,0,0.75);
 	box-shadow: -2px 10px 5px -7px rgba(0,0,0,0.75);
+	border: 0;
 }
 
 /* Page Heading */
@@ -49,8 +50,8 @@ a{
 	border-radius: 50%;
 }
 
-.main-links{
-	display: inline-block;
+.top-links{
+	color: rgb(0,0,0);
 }
 
 .list-items{
@@ -61,13 +62,33 @@ a{
 /* Search form */
 .search-form{
 	margin-top: 10px;
-	display: inline-block;
-	float: right;
+	width: 900px;
+	margin: 0 auto;
+	margin-bottom: 10px;
+}
+
+/* Upload block */
+.upload{
+	position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+
+/* Upload button */
+.upload input.file-upload{
+	position: absolute;
+    /*top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;*/
+    /*cursor: pointer;*/
+    opacity: 0;
+    filter: alpha(opacity=0);
+
 }
 
 /* Search input box */
 .search{
-	display: inline-block;
 	margin: 0 auto;
 	padding:6px 13px;
 	border:1px solid rgb(219,219,219);
@@ -75,12 +96,11 @@ a{
 
 /* Search button */
 .submit{
-    position:relative;
     padding:6px 15px;
     left:-4px;
-    border:0.5px solid rgb(32,124,202);
-    background-color: rgb(32,124,202);
-    color:rgb(250,250,250);
+    border:0.5px solid rgba(32,124,202,0.3);
+    background-color: rgba(32,124,202,0.4);
+    color:rgb(0,0,0);
     height: 33px;
 }   
 .submit:hover {   
@@ -90,12 +110,9 @@ a{
 
 /* Main page styling */
 .main-section{
-	background-color: rgb(32,124,202);
-	border-radius: 10px;
+	background-color: rgba(32,124,202,0.3);
+	border-radius: 5px;
 	padding: 10px;
-	width: 70%;
-	height: 100%;
-	margin-bottom: -30%;
 	margin: 0 auto;
 	width: 900px;
 	-webkit-box-shadow: 0px 4px 6px -1px rgba(0,0,0,0.75);
@@ -103,9 +120,9 @@ a{
 	box-shadow: 0px 4px 6px -1px rgba(0,0,0,0.75);
 }
 
+/* Create Index button */
 .create-index{
 	background-color: rgb(240,240,240);
-	margin-top: -30px;
 }
 
 .footer{
@@ -114,5 +131,5 @@ a{
    	width:100%;
    	height:60px;   /* Height of the footer */
    	background:#6cf;
-	background-color: rgb(32,124,202);
+	background-color: rgba(32,124,202,0.3);
 }
