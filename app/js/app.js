@@ -1,135 +1,125 @@
 {
-	/** 
-	 * 
-	 */
-	class InvertedIndex{
+  /**
+   * @class InvertedIndex
+   */
+  class InvertedIndex {
+    /**
+     * Class Constructor
+     * @constructor
+     */
+    constructor() {
+      this.allIndices = {};
+    }
 
-		/** 
-		 * Class Constructor
-		 * @constructor
-		 */
-		constructor(){
-			this.allIndices = {};
-		}
+    /**
+     * Reads the data from the file being uploaded
+     * @param  {File} file - Uploaded file to be read.
+     * @return {void}
+     */
+    static readFile(file) {
+      const reader = new FileReader();
+      reader.onload = () => reader.result;
+      reader.readAsText(file);
+    }
+     /**
+     * Ensures all the documents in a particular file is valid
+     * @param  {Object} file
+     * @return {[Boolean]} isValid -True or false
+     */
+    validateFile(file) {
+      this.file = file;
+      let checkField,
+        isValid = true;
+      try {
+        const parsedJSON = JSON.parse(JSON.stringify(this.file));
+        isValid = (parsedJSON.length === 0) ? false : checkField;
+        checkField = parsedJSON.forEach((key) => {
+          isValid = (typeof key.title !== 'string' ||
+            typeof key.text !== 'string') ? false : isValid;
+        });
+      } catch (error) {
+        isValid = false;
+      }
+      return isValid;
+    }
+    /**
+     * Strips out special characters from documents to be indexed
+     * @param  {String} fileText - String from file to be tokenized
+     * @return {Array} An array of unique words
+     */
+    tokenize(fileText) {
+      this.text = fileText;
+      return [...new Set(this.text
+                .toLowerCase()        // Converts text to lower case
+                .replace(/[^\w\s]/g, '')  // Removes any non-word character
+                .split(/\s+/)       // Turns it into an array
+                .sort()           // Sorts array
+      )];
+    }
+    /**
+     * Creates the index for documents
+     * @param  {String} fileName
+     * @param  {String} content
+     * @return {Object} this.allIndices
+     */
+    createIndex(fileName, content) {
+      const fileIndex = {};
 
-		/** 
-		 * Reads the data from the file being uploaded
-		 * @param  {[File]} file - Uploaded file to be read.
-		 * @return {[void]}
-		 */
- 		readFile(file){
-			let reader = new FileReader();
-				reader.onload = (ev) => {
-					let uploadedJSON = reader.result;
-				}
-				reader.readAsText(file);
-		}
+      content.forEach((objDoc, index) => {
+        for (const key in objDoc) {
+          const tokens = this.tokenize(objDoc[key]);
 
-		/**
-		 * Ensures all the documents in a particular file is valid
-		 * @param  {[Object]} file
-		 * @return {[Boolean]} isValid -True or false
-		 */
-		validateFile(file){
-			this.file = file;
-			let checkField,
-				isValid = true;
-			try{
-				const parsedJSON = JSON.parse(JSON.stringify(this.file));
-				isValid = (parsedJSON.length === 0) ? false : checkField;
-				
-				checkField = parsedJSON.forEach((key) => {
-					isValid = (typeof key.title !== 'string' || typeof key.text !== 'string') ? false : true;
-				});
-			}
-			catch(error){
-				isValid = false;
-			}
-			return isValid;
-		}
-		
-		/** 
-		 * Strips out special characters from documents to be indexed
-		 * @param  {[String]} fileText - String from file to be tokenized
-		 * @return {[Array]} -An array of unique words
-		 */
-		tokenize(fileText){
-			this.text = fileText;
-			return [...new Set(this.text
-								.toLowerCase()				// Converts text to lower case
-								.replace(/[^\w\s]/g, '')	// Removes any non-word character e.g. dot
-								.split(/\s+/)				// Turns it into an array
-								.sort()						// Sorts array
-			)];
-		}
-		
-		/**
-		 * Creates the index for documents
-		 * @param  {[String]}
-		 * @param  {[]}
-		 * @return {[type]}
-		 */
-		createIndex(fileName, content){
-			const fileIndex = {};
+          tokens.forEach((token) => {
+            if (fileIndex[token]) {
+              if (fileIndex[token].indexOf(index) === -1) { // Checks for index
+                fileIndex[token].push(index);
+              }
+            } else {
+              fileIndex[token] = [index];
+            }
+          });
+        }
+      });
+      this.allIndices[fileName] = { words: fileIndex, count: content.length };
+      return this.allIndices[fileName];
+    }
+    /**
+     * Get’s indices created for particular files
+     * @param  {Object} fileName -Title of input file
+     * @return {Object} allIndices
+     */
+    getIndex(fileName) {
+      return this.allIndices[fileName];
+    }
+    /**
+     * Searches through one or more indices for words
+     * @param  {String} fileName -File name
+     * @param  {String} query -Input token
+     * @return {Object} searchResult
+     */
+    searchIndex(fileName, query) {
+      const queryTokens = this.tokenize(query),
+        index = this.getIndex(fileName);
+      if (!index) {
+        return `Index with ${fileName} does not exist`;
+      }
 
-			content.forEach((objDoc, index) =>{
-				for(const key in objDoc) {
-					const tokens = this.tokenize(objDoc[key]);
+      const searchResult = {
+        words: {},
+        docCount: index.docCount
+      };
 
-					tokens.forEach((badge) => {
-						if (fileIndex[badge]){								// Badge exist in fileIndex
-							if (fileIndex[badge].indexOf(index) === -1) {	// Checks for unique index
-								fileIndex[badge].push(index);
-							}
-						} else{
-							fileIndex[badge] = [index];
-						}
-					});
-				}
-			});
-			this.allIndices[fileName] = {words:fileIndex, count:content.length};
-			return this.allIndices[fileName];
-		}
+      queryTokens.forEach((token) => {
+        if (index.words[token]) {
+          searchResult.words[token] = index.words[token];
+        }
+      });
 
-		/**
-		 * Get’s indices created for particular files
-		 * @param  {[type]}
-		 * @return {[type]}
-		 */
-		getIndex(fileName){
+      return Object.keys(searchResult.words).length > 0
+      ? searchResult : 'No word found';
+    }
+  }
 
-			return this.allIndices[fileName];
-		}
-
-		/**
-		 * Searches through one or more indices for words 
-		 * @param  {[]]}
-		 * @param  {[String]} query -Input token
-		 * @return {[type]}
-		 */
-		searchIndex(fileName, query){
-			const queryTokens = this.tokenize(query),
-				  index 	  = this.getIndex(fileName);
-			
-			if (!index) {
-				return `Index with ${fileName} does not exist`;
-			}
-
-			let searchResult = {
-				words:{},
-				docCount: index.docCount
-			};
-
-			queryTokens.forEach((token) => {
-				if (index.words[token]) {
-					searchResult.words[token] = index.words[tokens];
-				}
-			});
-
-			return Object.keys(searchResult.words).length > 0 ? searchResult : 'No word found';
-		}
-	}
-
-	/** App exported as Node package */
-	module.exports = InvertedIndex;
+  /** App exported as Node package */
+  module.exports = InvertedIndex;
 }
