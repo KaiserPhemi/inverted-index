@@ -4,7 +4,7 @@
   "description": "An Inverted Index app",
   "main": "app/js/app.js",
   "scripts": {
-    "start": "node node_modules/gulp/bin/gulp",
+    "start": "node server.js",
     "test": "jasmine-node spec/",
     "coverage": "`npm bin`/jasmine-node cover spec/complex-spec.js",
     "coveralls": "npm run-script coverage && node bin/coveralls.js < coverage/lcov.info"
