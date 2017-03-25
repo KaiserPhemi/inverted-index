@@ -7,7 +7,15 @@
       invIndexInstance = new InvertedIndex(),
       badFormat = require('./books/bad-format.json'),
       empty     = require('./books/empty.json'),
-      validBook   = require('./books/books.json');
+      book = require('./books/books.json');
+  /**
+   * Test case for Class definition
+   */
+  describe('InvertedIndex class', () => {
+    it('should be defined', () => {
+      expect(InvertedIndex).toBeDefined();
+    });
+  });
   /**
    * Test case for constructor
    */
@@ -23,7 +31,7 @@
   describe('validateFile', () => {
       
       it('should return `true` for valid json file', () => {
-        expect(invIndexInstance.validateFile(validBook)).toBe(true);
+        expect(invIndexInstance.validateFile(book)).toBe(true);
       });
 
       it('should return `false` for empty files', () => {
@@ -38,11 +46,16 @@
    * Test cases for tokenize method
    */
   describe('tokenize method', () => {
-    it('should return array of unique words without whitespace or characters', () => {
-        expect(invIndexInstance.tokenize(validBook[0].title)).toEqual(['alice','in','wonderland']);
+    it('should return array of lowercase unique words without whitespace or characters', () => {
+        expect(invIndexInstance.tokenize(book[0].title)).toEqual(['alice','in','wonderland']);
     });
   });
   /**
-   * Test cases for searchIndex method
+   * Test cases for readFile method
    */
+  describe('readFile method', () => {
+    it('should return json file if it is valid', () => {
+      
+    });
+  });
 }
