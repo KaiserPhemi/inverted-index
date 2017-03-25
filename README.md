@@ -1,5 +1,6 @@
 # Inverted Index
 [![Build Status](https://travis-ci.org/andela-oakinwa/inverted-index.svg?branch=master)](https://travis-ci.org/andela-oakinwa/inverted-index)
+[![Code Climate](https://codeclimate.com/github/andela-oakinwa/inverted-index/badges/gpa.svg)](https://codeclimate.com/github/andela-oakinwa/inverted-index)
 [![Coverage Status](https://coveralls.io/repos/github/andela-oakinwa/inverted-index/badge.svg?branch=master)](https://coveralls.io/github/andela-oakinwa/inverted-index?branch=master)
 
 ## Introduction
