@@ -10,7 +10,22 @@
     constructor() {
       this.allIndices = {};
     }
-
+    /**
+     * Method that handles file upload
+     * @return {Array} An array of all files uploaded
+     */
+    static uploadFile() {
+      let uploadedFiles = [];
+      if (window.File && window.FileReader && window.FileList
+        && window.Blob) {
+        let fileUpload = document.getElementsByClassName('file-upload')[0];
+        if (this.validateFile(fileUpload)) {
+          uploadedFiles.push(fileUpload);
+        }
+      } else {
+        return 'The File APIs are not fully supported in this browser.';
+      }
+    }
     /**
      * Reads the data from the file being uploaded
      * @param  {File} file - Uploaded file to be read.
@@ -24,18 +39,18 @@
      /**
      * Ensures all the documents in a particular file is valid
      * @param  {Object} file
-     * @return {[Boolean]} isValid -True or false
+     * @return {Boolean} isValid -True or false
      */
     validateFile(file) {
       this.file = file;
-      let checkField,
-        isValid = true;
+      let isValid = true;
       try {
         const parsedJSON = JSON.parse(JSON.stringify(this.file));
-        isValid = (parsedJSON.length === 0) ? false : checkField;
-        checkField = parsedJSON.forEach((key) => {
-          isValid = (typeof key.title !== 'string' ||
-            typeof key.text !== 'string') ? false : isValid;
+        isValid = (parsedJSON.length === 0) ? false : isValid;
+        parsedJSON.forEach((key) => {
+          if (typeof key.title !== 'string' || typeof key.text !== 'string') {
+            isValid = false;
+          }
         });
       } catch (error) {
         isValid = false;
@@ -121,5 +136,7 @@
   }
 
   /** App exported as Node package */
-  module.exports = InvertedIndex;
+  if (typeof window === 'undefined') {
+    module.exports = InvertedIndex;
+  }
 }
