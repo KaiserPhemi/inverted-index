@@ -1,14 +1,10 @@
-{ 
-  /**
-   * [invIndex description]
-   * @type {InvertedIndex}
-   */
-  const invIndex = new InvertedIndex(),
-    MainController = ($scope) => {
-      $scope.uploads = () => {
-        invIndex.readFile();
-      }
+{
+  const MainController = ($scope) => {
+    const invIndex = new InvertedIndex();
+    $scope.uploads = () => {
+      invIndex.readFile();
     };
+  };
 
   angular.module('mainApp', [])
   .controller('MainController', MainController);
