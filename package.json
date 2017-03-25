@@ -6,6 +6,7 @@
   "scripts": {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "start": "node node_modules/gulp/bin/gulp",
 =======
     "start": "node server.js",
@@ -13,6 +14,9 @@
 =======
     "start": "node server.js",
 >>>>>>> e0d1b649ed9beb3cbf30b8676d9ec0bd9eff3669
+=======
+    "start": "node server.js",
+>>>>>>> development
     "test": "jasmine-node spec/",
     "coverage": "`npm bin`/jasmine-node cover spec/complex-spec.js",
     "coveralls": "npm run-script coverage && node bin/coveralls.js < coverage/lcov.info"
@@ -37,15 +41,23 @@
     "jasmine-node": "^1.14.5"
   },
   "devDependencies": {
+    "babel-eslint": "^6.1.2",
     "browser-sync": "^2.18.8",
+<<<<<<< HEAD
     "dotenv": "^4.0.0",
     "eslint": "^3.17.1",
+=======
+    "connect": "^3.6.0",
+    "eslint": "^3.18.0",
+    "eslint-config-airbnb": "^14.1.0",
+>>>>>>> development
     "eslint-config-airbnb-base": "^11.1.1",
     "eslint-plugin-import": "^2.2.0",
     "express": "^4.15.2",
     "gulp": "^3.9.1",
     "gulp-uglify": "^2.1.0",
     "gulp-util": "^3.0.8",
-    "gulp-watch": "^4.3.11"
+    "gulp-watch": "^4.3.11",
+    "serve-static": "^1.12.1"
   }
 }

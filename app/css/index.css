@@ -8,21 +8,12 @@
 
 /* Default styling for the whole page */
 html, body{
-<<<<<<< HEAD
-<<<<<<< HEAD
 	font-family: 'Lato', sans-serif;
 	width: 100%;
   	height: 100%;
   	padding: 0px;
   	margin: 0px;
-=======
 	font-size: 100%;
-	font-family: 'Oxygen', sans-serif;
->>>>>>> node modules installed
-=======
-	font-size: 100%;
-	font-family: 'Oxygen', sans-serif;
->>>>>>> e0d1b649ed9beb3cbf30b8676d9ec0bd9eff3669
  }
 
 /* Default for all divs */
@@ -36,16 +27,14 @@ div{
 a{
 	text-decoration: none;
 }
-
-<<<<<<< HEAD
-<<<<<<< HEAD
 /* Navigation bar */
 .main-nav{
-	background-color: rgb(240,240,240);
+	background-color: rgba(32,124,202,0.2);
 	height: 60px;
 	-webkit-box-shadow: -2px 10px 5px -7px rgba(0,0,0,0.75);
     -moz-box-shadow: -2px 10px 5px -7px rgba(0,0,0,0.75);
 	box-shadow: -2px 10px 5px -7px rgba(0,0,0,0.75);
+	border: 0;
 }
 
 /* Page Heading */
@@ -57,9 +46,6 @@ a{
 	margin-top: 15px;
 }
 
-=======
-=======
->>>>>>> e0d1b649ed9beb3cbf30b8676d9ec0bd9eff3669
 .main-nav{
 	background-color: rgba(54,97,100,0.45);
 }
@@ -81,10 +67,11 @@ a{
 	float: right;
 	position: all;
 }
-<<<<<<< HEAD
->>>>>>> node modules installed
-=======
->>>>>>> e0d1b649ed9beb3cbf30b8676d9ec0bd9eff3669
+
+/* control-wrapper */
+.control-wrapper{
+	display: inline-flex;
+}
 
 /* Logo */
 .logo{
@@ -94,8 +81,9 @@ a{
 	border-radius: 50%;
 }
 
-.main-links{
-	display: inline-block;
+/*  */
+.top-links{
+	color: rgb(0,0,0);
 }
 
 .list-items{
@@ -106,13 +94,32 @@ a{
 /* Search form */
 .search-form{
 	margin-top: 10px;
-	display: inline-block;
-	float: right;
+	margin-bottom: 10px;
+}
+
+/* Upload block */
+.upload{
+	position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+
+/* Upload button */
+.upload input.file-upload{
+	position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    background-color: rgba(32,124,202,0.4)
+
 }
 
 /* Search input box */
 .search{
-	display: inline-block;
 	margin: 0 auto;
 	padding:6px 13px;
 	border:1px solid rgb(219,219,219);
@@ -120,12 +127,11 @@ a{
 
 /* Search button */
 .submit{
-    position:relative;
     padding:6px 15px;
     left:-4px;
-    border:0.5px solid rgb(32,124,202);
-    background-color: rgb(32,124,202);
-    color:rgb(250,250,250);
+    border:0.5px solid rgba(32,124,202,0.3);
+    background-color: rgba(32,124,202,0.4);
+    color:rgb(0,0,0);
     height: 33px;
 }   
 .submit:hover {   
@@ -135,20 +141,10 @@ a{
 
 /* Main page styling */
 .main-section{
-<<<<<<< HEAD
-<<<<<<< HEAD
 	background-color: rgb(32,124,202);
-=======
 	background-color: rgba(54,97,100,0.45);
->>>>>>> node modules installed
-=======
-	background-color: rgba(54,97,100,0.45);
->>>>>>> e0d1b649ed9beb3cbf30b8676d9ec0bd9eff3669
-	border-radius: 10px;
+	border-radius: 5px;
 	padding: 10px;
-	width: 70%;
-	height: 100%;
-	margin-bottom: -30%;
 	margin: 0 auto;
 	width: 900px;
 	-webkit-box-shadow: 0px 4px 6px -1px rgba(0,0,0,0.75);
@@ -156,9 +152,9 @@ a{
 	box-shadow: 0px 4px 6px -1px rgba(0,0,0,0.75);
 }
 
+/* Create Index button */
 .create-index{
-	background-color: rgb(240,240,240);
-	margin-top: -30px;
+	background-color: rgba(32,124,202,0.3);
 }
 
 .footer{
@@ -167,5 +163,5 @@ a{
    	width:100%;
    	height:60px;   /* Height of the footer */
    	background:#6cf;
-	background-color: rgb(32,124,202);
+	background-color: rgba(32,124,202,0.3);
 }

@@ -1,20 +1,11 @@
 {
+  const MainController = ($scope) => {
+    const invIndex = new InvertedIndex();
+    $scope.uploads = () => {
+      invIndex.readFile();
+    };
+  };
 
-	/* Declarations */
-	angular.module('invertedIndex', [])
-	.controller('TableController', TableController)
-	.controller('FileUploadController', FileUploadController);
-
-	/* Controller handling table generated */
-	TableController.$inject = ['$scope'];
-	function TableController($scope){
-
-		$scope.table='';	
-	}
-
-	/* Controller handling file upload */
-	FileUploadController.$inject = ['$scope'];
-	function FileUploadController($scope){
-
-	}
+  angular.module('mainApp', [])
+  .controller('MainController', MainController);
 }
