@@ -1,32 +1,30 @@
 {
   /**
-   * [gulp description]
+   * Gulpfile that watches for file changes and reloads page
    * @type {[type]}
    */
-  const gulp  = require('gulp'),
-        sync =require('browser-sync').create(),
-        minify = require('gulp-uglify'),
-        watch = require('gulp-watch');
+  const gulp = require('gulp'),
+    pageSync = require('browser-sync').create(),
+    watch = require('gulp-watch');
 
   /* create a default task */
-  gulp.task('default', ['sync', 'watch'], () => {
-    gulp.watch(files.js, ['js', sync.reload()]);
-    gulp.watch(file.html, ['html', sync.reload()]);
-  });
+  gulp.task('default', ['watch']);
 
   /** Task to reload for every change */
-  gulp.task('watch', () => {
-    gulp.watch(['app/*html', 'app/js/*.js', 'app/css/*.csss'])
-      .on('change', sync.reload());
+  gulp.task('watch', ['sync'], () => {
+    gulp.watch('app/*html', pageSync.reload)
+        .watch('app/js/*.js', pageSync.reload)
+        .watch('app/css/*.css', pageSync.reload);
   });
 
   /* Create a task to watch for file changes */
   gulp.task('sync', () => {
-    sync.init({
-      server:{
-        baseDir: './'
+    pageSync.init({
+      server: {
+        baseDir: './app',
+        index: 'index.html'
       },
-      port:7000
+      port: process.env.PORT || 7000
     });
   });
 }
