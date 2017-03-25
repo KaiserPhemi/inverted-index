@@ -48,17 +48,18 @@
 			</div>
 		</nav>
 
-		<div class="" ng-controller="MainController">
+		<!-- Upload, create-index and Search Bar -->
+		<div class="row control-wrapper" ng-controller="MainController">
 				
 				<!-- Upload section -->
 				<div class="btn btn-primary upload">
 					<span>Upload File</span>
-					<input type="file" class="file-upload btn-file" accept=".json" name="json-files" multiple>
+					<input type="file" class="file-upload btn-file" accept=".json" name="files[]" multiple>
 				</div>
 
 				<!-- Create index button -->
-				<div class="container main-section">
-					<button class="create-index btn" ng-click="createIndex()">Create Index</button>
+				<div>
+					<button class="create-index btn" ng-click="invIndex.createIndex()">Create Index</button>
 				</div>
 
 				<!-- Search Box -->
@@ -69,11 +70,13 @@
 
 		</div>
 
-		<footer class="footer">
-			<small>
-				&copy; 2017 Oluwafemi Akinwa
-			</small>
-		</footer>
+		<!-- Output section -->
+		<div>
+			<div class="container main-section">
+					
+			</div>
+		</div>
+
 		<!--Shared scripts-->
 		<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js'></script>
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
