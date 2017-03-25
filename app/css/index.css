@@ -41,6 +41,10 @@ a{
 	margin-top: 15px;
 }
 
+/* control-wrapper */
+.control-wrapper{
+	display: inline-flex;
+}
 
 /* Logo */
 .logo{
@@ -50,6 +54,7 @@ a{
 	border-radius: 50%;
 }
 
+/*  */
 .top-links{
 	color: rgb(0,0,0);
 }
@@ -62,8 +67,6 @@ a{
 /* Search form */
 .search-form{
 	margin-top: 10px;
-	width: 900px;
-	margin: 0 auto;
 	margin-bottom: 10px;
 }
 
@@ -77,13 +80,14 @@ a{
 /* Upload button */
 .upload input.file-upload{
 	position: absolute;
-    /*top: 0;
+    top: 0;
     right: 0;
     margin: 0;
-    padding: 0;*/
-    /*cursor: pointer;*/
+    padding: 0;
+    cursor: pointer;
     opacity: 0;
     filter: alpha(opacity=0);
+    background-color: rgba(32,124,202,0.4)
 
 }
 
@@ -122,7 +126,7 @@ a{
 
 /* Create Index button */
 .create-index{
-	background-color: rgb(240,240,240);
+	background-color: rgba(32,124,202,0.3);
 }
 
 .footer{
