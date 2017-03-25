@@ -1,7 +1,7 @@
 # Inverted Index
-[![Build Status](https://travis-ci.org/andela-oakinwa/inverted-index.svg?branch=master)](https://travis-ci.org/andela-oakinwa/inverted-index)
+[![Build Status](https://travis-ci.org/andela-oakinwa/inverted-index.svg?branch=development)](https://travis-ci.org/andela-oakinwa/inverted-index)
 [![Code Climate](https://codeclimate.com/github/andela-oakinwa/inverted-index/badges/gpa.svg)](https://codeclimate.com/github/andela-oakinwa/inverted-index)
-[![Coverage Status](https://coveralls.io/repos/github/andela-oakinwa/inverted-index/badge.svg?branch=master)](https://coveralls.io/github/andela-oakinwa/inverted-index?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/andela-oakinwa/inverted-index/badge.svg?branch=development)](https://coveralls.io/github/andela-oakinwa/inverted-index?branch=master)
 
 ## Introduction
 Inverted index takes a JSON array of text objects and creates an index from the array. The index allows a user to search for text blocks in the array that contain a specified collection of words.
