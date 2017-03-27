@@ -41,6 +41,7 @@
     "gulp-uglify": "^2.1.0",
     "gulp-util": "^3.0.8",
     "gulp-watch": "^4.3.11",
+    "istanbul": "^0.4.5",
     "serve-static": "^1.12.1"
   }
 }
