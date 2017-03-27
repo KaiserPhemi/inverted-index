@@ -7,7 +7,8 @@
       invIndexInstance = new InvertedIndex(),
       badFormat = require('./books/bad-format.json'),
       empty     = require('./books/empty.json'),
-      book = require('./books/books.json');
+      book = require('./books/books.json'),
+      otherBook = require('./books/other-book.json');
   /**
    * Test case for Class definition
    */
@@ -58,4 +59,12 @@
       
     });
   });
+  /**
+   * Test cases for createIndex method
+   */
+   describe('createIndex method', () =>{
+    it('should return index of words and number of books in a json file', () => {
+    expect(invIndexInstance.createIndex('other-book', otherBook)).toBe('{ words: { alice: [ 0 ], in: [ 0 ], wonderland: [ 0 ], a: [ 0 ], falls: [ 0 ], hole: [ 0 ], into: [ 0 ], rabbit: [ 0 ] }, bookCount: 1 }');
+    });
+   });
 }
