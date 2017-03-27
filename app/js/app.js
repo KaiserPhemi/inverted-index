@@ -11,22 +11,6 @@
       this.allIndices = {};
     }
     /**
-     * Method that handles file upload
-     * @return {Array} An array of all files uploaded
-     */
-    static uploadFile() {
-      let uploadedFiles = [];
-      if (window.File && window.FileReader && window.FileList
-        && window.Blob) {
-        let fileUpload = document.getElementsByClassName('file-upload')[0];
-        if (this.validateFile(fileUpload)) {
-          uploadedFiles.push(fileUpload);
-        }
-      } else {
-        return 'The File APIs are not fully supported in this browser.';
-      }
-    }
-    /**
      * Reads the data from the file being uploaded
      * @param  {File} file - Uploaded file to be read.
      * @return {void}
@@ -74,8 +58,8 @@
     /**
      * Creates the index for documents
      * @param  {String} fileName
-     * @param  {String} content
-     * @return {Object} this.allIndices
+     * @param  {Array} content
+     * @return {Object} this.allIndices object
      */
     createIndex(fileName, content) {
       const fileIndex = {};
@@ -95,7 +79,8 @@
           });
         }
       });
-      this.allIndices[fileName] = { words: fileIndex, count: content.length };
+      this.allIndices[fileName] = { words: fileIndex,
+        bookCount: content.length };
       return this.allIndices[fileName];
     }
     /**
@@ -139,4 +124,6 @@
   if (typeof window === 'undefined') {
     module.exports = InvertedIndex;
   }
+
+  const invIndex = new InvertedIndex();
 }
