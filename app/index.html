@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	
-	<!--Contains page data and links-->
+	<!--Contains site metadata and links-->
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,10 +11,10 @@
 	</head>
 	
 	<!--Visible part of page-->
-	<body ng-app="mainApp">
+	<body ng-app="mainApp"> 
 
 		<!--Navigation bar-->
-		<nav class="navbar navbar-inverse navbar-static-top main-nav">
+		<nav class="navbar navbar-inverse navbar-light navbar-static-top bg-faded main-nav">
 
 			<!--Page logo-->
 			<span>
@@ -39,43 +39,98 @@
         		</div>
 
 				<!--Navigation-->
-				<div class="main-links collapse navbar-collapse">
-					<ul class="nav navbar-nav navbar-right">
-					  <li><a href="#">About App</a></li>
-					  <li><a href="#">Help</a></li>
+				<div class="collapse navbar-collapse">
+					<ul class="navbar-nav navbar-right main-links nav-pills">
+					  <li><a href="#" data-toggle="modal" data-target="#aboutMessage">About App</a></li>
+					  <li><a href="#" data-toggle="modal" data-target="#helpMessage">Help</a></li>
 					</ul>
 				</div>
+
+                <!-- About modal -->
+                <div class="modal fade" id="aboutMessage">
+                    <div class="modal-dialog" >
+                        <div class="modal-content">
+                            
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">About App</h4>
+                            </div>
+
+                            <!-- Modal Body -->
+                            <div class="modal-body">
+                                <h5>Inverted Index</h5>
+                                <p>An Inverted Index is an Index Data Structure storing a mapping from content to location (i.e. a mapping of words or numbers to it's location in a database file).
+                                This Data Structure is widely used in several scenarios e.g. Cell Phone Lookup (where you have a phonebook which several contacts and you type in a person's number which in turn brings out the contact details of the person associated with that number).</p>
+                                <p>This application builds an index from books in a file and allows you search through the file for words in that book according to the description <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/inverted-index.html">here</a>. Also, the application will allow users upload a JSON file with this <a href="https://gist.github.com/q-ode/72019451b98f079a8d737eb7a412bf14">structure.</a></p>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+
+                <!-- Help modal -->
+                <div class="modal fade" id="helpMessage">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Help</h4>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <h5>How to use</h5>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                        
 			</div>
 		</nav>
 
+        <div class="alert hide alert-danger">
+            <p>{{message}}</p>
+        </div>
+
 		<!-- Upload, create-index and Search Bar -->
-		<div class="row control-wrapper" ng-controller="MainController">
+		<div class="container control-wrapper" ng-controller="MainController">
 				
 				<!-- Upload section -->
 				<div class="btn btn-primary upload">
-					<span>Upload File</span>
-					<input type="file" class="file-upload btn-file" accept=".json" name="files[]" multiple>
+					<span class="btn-upload">Upload File</span>
+					<input type="file" class="file-upload" accept=".json" name="files[]" onchange="InvertedIndex.readFile()" multiple>
 				</div>
 
-				<!-- Create index button -->
+				<!-- Create index bar -->
 				<div>
-					<button class="create-index btn" ng-click="invIndex.createIndex()">Create Index</button>
+                    <input type="text" name="file-name" class="file-name">
+					<button class="create-index btn submit" onclick="invIndex.createIndex()">Create Index</button>
 				</div>
 
 				<!-- Search Box -->
-				<form class="search-form" action="">
+				<form class="search-form">
 					<input class="search" type="text" placeholder="Type here">
-					<input class="submit" type="submit" value="Search" ng-submit="searchIndex()">
+					<input class="btn submit" type="submit" value="Search" ng-submit="searchIndex()">
 				</form>
-
 		</div>
 
 		<!-- Output section -->
-		<div>
-			<div class="container main-section">
+		<div class="container main-section">
 					
-			</div>
 		</div>
+		
 
 		<!--Shared scripts-->
 		<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js'></script>
