@@ -5,8 +5,8 @@
   "main": "app/js/app.js",
   "scripts": {
     "start": "node server.js",
-    "test": "jasmine-node spec/",
-    "coverage": "`npm bin`/jasmine-node cover spec/complex-spec.js",
+    "test": "./node_modules/jasmine-node/bin/jasmine-node spec/",
+    "coverage": "./node_modules/jasmine-node/bin/jasmine-node cover spec/app-spec.js",
     "coveralls": "npm run-script coverage && node bin/coveralls.js < coverage/lcov.info"
   },
   "repository": {
