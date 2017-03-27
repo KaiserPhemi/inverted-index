@@ -1,3 +1,4 @@
+/* eslint-disable */
 {
   /**
    * Gulpfile that watches for file changes and reloads page
@@ -24,7 +25,7 @@
         baseDir: './app',
         index: 'index.html'
       },
-      port: process.env.PORT || 7000
+      port: process.env.PORT || 9000
     });
   });
 }
