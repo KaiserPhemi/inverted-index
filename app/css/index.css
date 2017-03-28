@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+=======
+/* Font import */
+@import url('https://fonts.googleapis.com/css?family=Oxygen:400,700');
+<<<<<<< HEAD
+=======
+
+>>>>>>> e0d1b649ed9beb3cbf30b8676d9ec0bd9eff3669
+
+
+>>>>>>> master
 /* Default styling for the whole page */
 html, body{
 	font-family: 'Comic Sans MS', sans-serif;
@@ -5,6 +16,7 @@ html, body{
   	height: 100%;
   	padding: 0px;
   	margin: 0px;
+	font-size: 100%;
  }
 
 /* Default for all divs */
@@ -18,7 +30,6 @@ div{
 a{
 	text-decoration: none !important; 
 }
-
 /* Navigation bar */
 .main-nav{
 	background-color: rgba(32,124,202,0.2);
@@ -32,6 +43,28 @@ a{
 	margin: 0 auto;
 	margin-bottom: -40px;
 	margin-top: 15px;
+}
+
+.main-nav{
+	background-color: rgba(54,97,100,0.45);
+}
+
+.main-heading{
+	display: inline-block;
+	float: left;
+}
+.header{
+	float: left;
+}
+
+.search-bar{
+	display: inline;
+	float: right;
+}
+
+.create-index{
+	float: right;
+	position: all;
 }
 
 /* control-wrapper */
@@ -118,8 +151,14 @@ a{
 
 /* Main page styling */
 .main-section{
+<<<<<<< HEAD
 	background-color: rgba(32,124,202,0.3);
 	border-radius: 3px;
+=======
+	background-color: rgb(32,124,202);
+	background-color: rgba(54,97,100,0.45);
+	border-radius: 5px;
+>>>>>>> master
 	padding: 10px;
 	margin: 0 auto;
 	width: 900px;

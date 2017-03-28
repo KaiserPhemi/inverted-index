@@ -109,11 +109,65 @@
         docCount: index.docCount
       };
 
+<<<<<<< HEAD
+		/* Ensures all the documents in a particular file is valid */
+<<<<<<< HEAD
+<<<<<<< HEAD
+		validateFile(file){
+			this.file = file;
+			let checkField,
+				isValid = true;
+			try{
+				const parsedJSON = JSON.parse(JSON.stringify(this.file));
+				isValid = (parsedJSON.length === 0) ? false : checkField;
+				
+				checkField = parsedJSON.forEach((key) => {
+					isValid = (typeof key.title !== 'string' || typeof key.text !== 'string') ? false : true;
+				});
+			}
+			catch(error){
+				isValid = false;
+			}
+			return isValid;
+=======
+=======
+>>>>>>> e0d1b649ed9beb3cbf30b8676d9ec0bd9eff3669
+		validateFile(body){
+			try {
+				const data = JSON.parse(body);
+    				// if came to here, then valid
+    				return data;
+  			}
+  			catch(err){
+    				// failed to parse
+    		return null;
+  			}
+<<<<<<< HEAD
+>>>>>>> node modules installed
+=======
+>>>>>>> e0d1b649ed9beb3cbf30b8676d9ec0bd9eff3669
+		}
+		
+		/* Strips out special characters from documents to be indexed */
+		tokenize(text){
+			this.text = text;
+			return this.text
+					.toLowerCase()				// Converts text to lower case
+					.replace(/[^\w\s]/g, '')	// Removes any non-word character e.g. dot
+					.split(/\s+/)
+					.sort();				// Turns it into an array
+		}
+		
+		/* Creates the index for documents */
+		createIndex(fileName, content){
+			const fileIndex = {};
+=======
       queryTokens.forEach((token) => {
         if (index.words[token]) {
           searchResult.words[token] = index.words[token];
         }
       });
+>>>>>>> development
 
       return Object.keys(searchResult.words).length > 0
       ? searchResult : 'No word found';
