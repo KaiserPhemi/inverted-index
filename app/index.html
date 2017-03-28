@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="mainApp">
 	
 	<!--Contains site metadata and links-->
 	<head>
@@ -11,7 +11,7 @@
 	</head>
 	
 	<!--Visible part of page-->
-	<body ng-app="mainApp"> 
+	<body ng-controller="MainController"> 
 
 		<!--Navigation bar-->
 		<nav class="navbar navbar-inverse navbar-light navbar-static-top bg-faded main-nav">
@@ -47,7 +47,7 @@
 				</div>
 
                 <!-- About modal -->
-                <div class="modal fade" id="aboutMessage">
+                <div class="modal fade" id="aboutMessage" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" >
                         <div class="modal-content">
                             
@@ -67,7 +67,7 @@
 
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="close btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>                        
                     </div>
@@ -91,7 +91,7 @@
 
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="close btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
@@ -100,12 +100,12 @@
 			</div>
 		</nav>
 
-        <div class="alert hide alert-danger">
+        <div class="alert" id="msg-box" ng-model='message'>
             <p>{{message}}</p>
         </div>
 
 		<!-- Upload, create-index and Search Bar -->
-		<div class="container control-wrapper" ng-controller="MainController">
+		<div class="container control-wrapper">
 				
 				<!-- Upload section -->
 				<div class="btn btn-primary upload">
@@ -128,6 +128,27 @@
 
 		<!-- Output section -->
 		<div class="container main-section">
+			
+			<!-- Output table -->
+			<table>
+				<tbody>
+					<tr>
+						<td><p>Word:</p></td>
+						<td><p>Doc1:</p></td>
+						<td><p>Doc2:</p></td>
+					</tr>
+					<tr>
+						<td><input type="text" name="words"></td>
+						<td><input type="text" name="doc1"></td>
+						<td><input type="text" name="doc2"></td>
+					</tr>
+				</tbody>
+					<tr>
+						<td><input type="button" value=" + " file-upload></td>
+					</tr>
+				<tbody>
+				</tbody>
+			</table>
 					
 		</div>
 		
@@ -140,5 +161,9 @@
 		<!--Custom scripts-->
 		<script src="js/app.js"></script>
 		<script src="js/mainModule.js"></script>
+
+		<!-- Modal behaviour -->
+		<script>
+		</script>
 	</body>
 </html>
