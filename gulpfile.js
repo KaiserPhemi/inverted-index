@@ -22,7 +22,7 @@
   gulp.task('sync', () => {
     pageSync.init({
       server: {
-        baseDir: './app',
+        baseDir: './app/**/**',
         index: 'index.html'
       },
       port: process.env.PORT || 9000
