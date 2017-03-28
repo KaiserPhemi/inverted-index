@@ -1,3 +1,4 @@
+/* eslint-disable */
 {
 <<<<<<< HEAD
 	/* Grab our dependencies */
@@ -54,19 +55,19 @@
 
   /** Task to reload for every change */
   gulp.task('watch', ['sync'], () => {
-    gulp.watch('app/*html', pageSync.reload)
-        .watch('app/js/*.js', pageSync.reload)
-        .watch('app/css/*.css', pageSync.reload);
+    gulp.watch('app/*html', pageSync.reload())
+        .watch('app/js/*.js', pageSync.reload())
+        .watch('app/css/*.css', pageSync.reload());
   });
 
   /* Create a task to watch for file changes */
   gulp.task('sync', () => {
     pageSync.init({
       server: {
-        baseDir: './app',
+        baseDir: 'app/',
         index: 'index.html'
       },
-      port: process.env.PORT || 7000
+      port: process.env.PORT || 9000
     });
   });
 >>>>>>> development
