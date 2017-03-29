@@ -4,27 +4,12 @@
   "description": "An Inverted Index app",
   "main": "app/js/app.js",
   "scripts": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     "start": "node node_modules/gulp/bin/gulp",
-=======
     "start": "node server.js",
-<<<<<<< HEAD
     "test": "./node_modules/jasmine-node/bin/jasmine-node spec/",
     "coverage": "./node_modules/jasmine-node/bin/jasmine-node cover spec/app-spec.js",
-=======
->>>>>>> node modules installed
-=======
     "start": "node server.js",
->>>>>>> e0d1b649ed9beb3cbf30b8676d9ec0bd9eff3669
-=======
-    "start": "node server.js",
->>>>>>> development
-    "test": "jasmine-node spec/",
-    "coverage": "`npm bin`/jasmine-node cover spec/complex-spec.js",
->>>>>>> master
-    "coveralls": "npm run-script coverage && node bin/coveralls.js < coverage/lcov.info"
+    "coverage": "`npm bin`/jasmine-node cover spec/complex-spec.js"
   },
   "repository": {
     "type": "git",
@@ -48,15 +33,12 @@
   "devDependencies": {
     "babel-eslint": "^6.1.2",
     "browser-sync": "^2.18.8",
-<<<<<<< HEAD
     "dotenv": "^4.0.0",
     "eslint": "^3.17.1",
-=======
     "connect": "^3.6.0",
     "coveralls": "^2.12.0",
     "eslint": "^3.18.0",
     "eslint-config-airbnb": "^14.1.0",
->>>>>>> development
     "eslint-config-airbnb-base": "^11.1.1",
     "eslint-plugin-import": "^2.2.0",
     "express": "^4.15.2",

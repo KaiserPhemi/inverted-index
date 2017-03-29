@@ -34,6 +34,9 @@
         }
     };
 };
+  const populateTable = () => {
+    
+  };
 
   angular.module('mainApp', [])
   .controller('MainController', MainController)
