@@ -1,22 +1,14 @@
-{
-  const invIndex = new InvertedIndex();
+{ 
+  
   const MainController = ($scope) => {
+    const invIndex = new InvertedIndex();
     $scope.uploads = () => {
       invIndex.readFile();
     };
-    $scope.message = 'Default';
-    $scope.messageBox = getElementById('msg-box')[0];
-    $scope.feedback = (args) => {     
-      switch(args){
-        case 1:
-          message = 'Valid file. Upload successful';
-          messageBox.className += ' alert-success';
-        case 2:
-          message = 'Invalid JSON file';
-          messageBox.className += ' alert-danger';
-      }
+    $scope.message = '';
+    $scope.searchResult =
 
-    }
+   
   };
 
   const fileUpload = () => {
@@ -35,7 +27,16 @@
     };
 };
 
+// Document ready.
+document.addEventListener('DOMContentLoaded', () => {
+  // Attach file upload listener
+  document.getElementById('json-file')
+    .addEventListener('change', function createFile() {
+      if (this.files[0]) {
+        angular.element(this).scope().createIndex(this.files[0]);
+      }
+    });
+});
   angular.module('mainApp', [])
-  .controller('MainController', MainController)
-  .directive('fileUpload', fileUpload);
+  .controller('MainController', MainController);
 }

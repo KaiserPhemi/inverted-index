@@ -7,8 +7,6 @@ const InvertedIndex = require('../app/js/app.js'),
   empty = require('./books/empty.json'),
   book = require('./books/books.json'),
   otherBook = require('./books/other-book.json');
-
-
 /**
  * Test case for Class definition
  */
