@@ -1,33 +1,30 @@
+/**
+ * Controller handling basic features of app
+ * @param  {Object} $scope Binds the view with the controller
+ * @return {[type]}        [description]
+ */
 const MainController = ($scope) => {
   $scope.invIndex = new InvertedIndex();
-  $scope.uploads = () => {};
-  $scope.message = '';
+  $scope.message = 'default';
   $scope.searchResult = {};
   $scope.fileUpload = () => {
-  return {
-      scope: true,        //create a new scope
-      link: function (scope, el, attrs) {
-          el.bind('change', function (event) {
-              var files = event.target.files;
-              //iterate files since 'multiple' may be specified on the element
-              for (var i = 0;i <files.length;i++) {
-                  //emit event upward
-                  scope.$emit("fileSelected", { file: files[i] });
-              }                                       
-          });
-      }
   };
 };
+MainController.$inject = ['$scope'];
+/**
+ * Controller handling table display
+ * @param  {Object} $scope Binds the view with the controller
+ * @return {[type]}        [description]
+ */
+const TableController = ($scope) => {
+  $scope.table = null;
+  $scope.tableMsg = 'No index created';
+};
+TableController.$inject = ['$scope'];
 
-// Document ready.
-document.addEventListener('DOMContentLoaded', () => {
-// Attach file upload listener
-document.getElementById('json-file')
-  .addEventListener('change', function createFile() {
-    if (this.files[0]) {
-      angular.element(this).scope().createIndex(this.files[0]);
-    }
-  });
-});
+/**
+ * Module declaration
+ */
 angular.module('mainApp', [])
-.controller('MainController', MainController);
+.controller('MainController', MainController)
+.controller('TableController', TableController);
