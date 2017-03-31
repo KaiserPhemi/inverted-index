@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="mainApp">
+<html lang="en">
 	
 	<!--Contains site metadata and links-->
 	<head>
@@ -9,19 +9,21 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/index.css">
+		
 	</head>
 	
 	<!--Visible part of page-->
-	<body ng-controller="MainController"> 
+	<body ng-app="mainApp" ng-controller="MainController"> 
 
 		<!--Navigation bar-->
 		<nav class="navbar navbar-inverse navbar-light bg-faded main-nav shadow bg-color">
 			
 			<!--Page heading-->
 			<span>
-				<h3 class="page-heading"><a href="index.html">Inverted Index App</a></h3>
+				<h3 class="page-heading"><a href="index.html">Inverted Index App </a></h3>
 			</span>
 
+            <!-- Navigation links -->
 			<div class="container">
 				
 				<!-- Hamburger menu for links -->
@@ -82,7 +84,12 @@
 
                             <!-- Modal body -->
                             <div class="modal-body">
-                                <h5>How to use</h5>
+                                <h4>How to use</h4>
+                                <ul>
+                                	<li>Click <b>Upload File</b> button to upload valid json file</li>
+                                	<li>Click <b>Create Index</b> button to create index of words from the file</li>
+                                	<li>Enter a search query in the search box and click <b>Search Index</b> to search for a particular word.</li>
+                                </ul>
                             </div>
 
                             <!-- Modal footer -->
@@ -94,50 +101,38 @@
                 </div>                  
 			</div>
 		</nav>
-		
+
 		<!-- Upload, create-index and Search Bar -->
-		<div class="container control-wrapper shadow bg-color">
+		<div class="container control-wrapper shadow bg-color" >
 				
 				<!-- Upload section -->
 				<div class="btn btn-primary upload">
 					<span class="btn-upload">Upload File</span>
-					<input type="file" class="file-upload" accept=".json" name="files[]" onchange="InvertedIndex.readFile()" multiple>
+					<input type="file" class="file-upload" accept=".json" name="files[]" ng-submit="fileUpload()" id="all-files" multiple>
 				</div>
 
 				<!-- Create index bar -->
-				<div>
-                    <input type="text" name="file-name" class="file-name">
-					<button class="create-index btn submit" onclick="invIndex.createIndex()">Create Index</button>
+				<div class="create-index-wrapper">
+				    <select type="text" name="fileList" id="file-list"></select>
+				    <button class="create-index btn btn-color" ng-click="createIndex()">Create Index</button>
 				</div>
 
 				<!-- Search Box -->
-				<form class="search-form">
+				<form class="search-form pull-right">
 					<input class="search" type="text" placeholder="Type here">
-					<input class="btn submit" type="submit" value="Search" ng-submit="searchIndex()">
+					<input class="btn submit btn-color" type="submit" value="Search Index" ng-submit="invIndex.searchIndex()">
 				</form>
 		</div>
 
 		<!-- Output section -->
-		<div class="container main-section shadow bg-color">
+		<div class="container main-section shadow bg-color" ng-controller="TableController">
 			
 			<!-- Output table -->
 			<table>
-				<tbody>
-					<tr>
-						<td><p>Words:</p></td>
-						<td><p>Doc1:</p></td>
-						<td><p>Doc2:</p></td>
-					</tr>
-					<tr>
-						<td><input type="text" name="words"></td>
-						<td><input type="text" name="doc1"></td>
-						<td><input type="text" name="doc2"></td>
-					</tr>
-				</tbody>
-					<tr>
-					</tr>
-				<tbody>
-				</tbody>
+			  <tr ng-repeat="out in indexTable" ng-model="tableMsg">
+			  {{tableMsg}}
+			  	
+			  </tr>
 			</table>
 			</div>
 		</div>
