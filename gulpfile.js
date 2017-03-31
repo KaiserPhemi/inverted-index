@@ -12,9 +12,9 @@ gulp.task('default', ['watch']);
 
 /** Task to reload for every change */
 gulp.task('watch', ['sync'], () => {
-  gulp.watch('app/*html', pageSync.reload())
-      .watch('app/js/*.js', pageSync.reload())
-      .watch('app/css/*.css', pageSync.reload());
+  gulp.watch('app/*html', pageSync.reload());
+  gulp.watch('app/js/*.js', pageSync.reload());
+  gulp.watch('app/css/*.css', pageSync.reload());
 });
 
 /* Create a task to watch for file changes */
