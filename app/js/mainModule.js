@@ -4,10 +4,28 @@
  * @return {[type]}        [description]
  */
 const MainController = ($scope) => {
-  $scope.invIndex = new InvertedIndex();
+  const invIndex = new InvertedIndex();
   $scope.message = 'default';
   $scope.searchResult = {};
-  $scope.fileUpload = () => {
+  $scope.fileUpload = (args) => {
+    let allFiles = args.target.files;
+    console.table(allFiles);
+    console.table(allFiles.length);
+    /*let fileInput = document.querySelector('#all-files').addEventListener('change', () => console.log(fileInput.files));*/
+    /*let allFilesUploaded = fileInput.files;*/
+/*    console.log(fileInput.files);
+*/    /*let uploads = allFilesUploaded.length,
+    count = 0;
+    while(count < uploads){
+      let singleFile = allFilesUploaded[uploads];
+      /*console.log(allFilesUploaded.name);*/
+      /*count++;*/
+  /*  }*/
+  };
+  document.querySelector('#all-files').addEventListener('change', $scope.fileUpload);
+
+  $scope.createIndex = () => {
+    $scope.tableMsg = '';
   };
 };
 MainController.$inject = ['$scope'];
