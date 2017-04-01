@@ -15,21 +15,40 @@ class InvertedIndex {
    * @return {void}
    */
   static readFile(file) {
-    const reader = new FileReader();
-    reader.onload = () => reader.result;
-    reader.readAsText(file);
+    return new Promise ((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        return (objFile) => {
+          const allFileNames = [],
+          fileName = file.name,
+          fileContent = objFile.target.result;
+          try {
+            if (InvertedIndex.validateFile(fileName, fileContent)) {
+              const finalContent = JSON.parse(fileContent);
+              allFileNames.push(fileName);
+            }
+            resolve(fileContent);
+          } catch (err) {
+              reject (err);
+            }
+        };
+      };
+      reader.readAsText(file);
+    }); 
   }
    /**
    * Ensures all the documents in a particular file is valid
    * @param  {Object} file
    * @return {Boolean} isValid -True or false
    */
-  validateFile(file) {
-    this.file = file;
+  validateFile(fileName, fileContent) {
+    this.content = fileContent;
+    this.fileName = fileName;
     let isValid = true;
     try {
-      const parsedJSON = JSON.parse(JSON.stringify(this.file));
-      isValid = (parsedJSON.length === 0) ? false : isValid;
+      const parsedJSON = JSON.parse(JSON.stringify(this.content));
+      isValid = (parsedJSON.length === 0) ? false :
+                (!this.fileName.toLowerCase().match(/\.json$/g)) ? false : isValid;
       parsedJSON.forEach((key) => {
         if (typeof key.title !== 'string' || typeof key.text !== 'string') {
           isValid = false;
