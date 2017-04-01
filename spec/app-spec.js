@@ -29,15 +29,15 @@ describe('Constructor', () => {
  */
 describe('validateFile', () => {
   it('should return `true` for valid json file', () => {
-    expect(invIndexInstance.validateFile(book)).toBe(true);
+    expect(invIndexInstance.validateFile('books.json', book)).toBe(true);
   });
 
   it('should return `false` for empty files', () => {
-    expect(invIndexInstance.validateFile(empty)).toBe(false);
+    expect(invIndexInstance.validateFile('books.json', empty)).toBe(false);
   });
 
   it('should return `false` for invalid file', () => {
-    expect(invIndexInstance.validateFile(badFormat)).toBe(false);
+    expect(invIndexInstance.validateFile('bad-format', badFormat)).toBe(false);
   });
 });
 /**
