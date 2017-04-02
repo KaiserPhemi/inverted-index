@@ -54,10 +54,18 @@ describe('tokenize method', () => {
  * Test cases for createIndex method
  */
 describe('createIndex method', () => {
+  it('should return `true` if index is created', () => {
+    expect(invIndexInstance.createIndex('other-book', otherBook))
+    .toEqual(true);
+  });
+});
+/**
+ * Test case for getIndex method
+ */
+describe('getIndex method', () => {
   it(`should return index of words and 
     number of books in a json file`, () => {
-    expect(invIndexInstance.createIndex('other-book', otherBook))
-    .toEqual({ words: { alice: [0],
+    expect().toEqual({ words: { alice: [0],
       in: [0],
       wonderland: [0],
       a: [0],
