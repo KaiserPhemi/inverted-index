@@ -108,12 +108,12 @@ class InvertedIndex {
   searchIndex(fileName, query) {
     const self = this;
     let location;
-     if (fileName.length === 0) {
+    if (fileName.length === 0) {
       location = Object.keys(self.allIndices);
     } else {
       location = fileName;
     }
-    let finalResult = {};
+    const finalResult = {};
     const queryTokens = this.tokenize(query);
     location.forEach((files) => {
       const searchResult = {};
