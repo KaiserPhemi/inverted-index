@@ -37,10 +37,10 @@ class InvertedIndex {
     this.fileName = fileName;
     let isValid = true;
     try {
-      const parsedJSON = JSON.parse(JSON.stringify(this.content));
-      isValid = (parsedJSON.length === 0) ? false : // eslint-disable-line
+      const parsed = JSON.parse(JSON.stringify(this.content));
+      isValid = (parsed.length === 0) ? false : // eslint-disable-line
         (!this.fileName.toLowerCase().match(/\.json$/g)) ? false : isValid;
-      parsedJSON.forEach((key) => {
+      parsed.forEach((key) => {
         if (typeof key.title !== 'string' || typeof key.text !== 'string') {
           isValid = false;
         }
