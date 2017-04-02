@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Sun Apr 02 2017 07:09:52 GMT+0100 (WAT)
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -15,8 +15,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'spec/app-spec.js',
-      {pattern: 'spec/*.js', included: false}
+      'app/js/app.js',
+      'spec/app-spec.js'
     ],
 
 
@@ -28,13 +28,19 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+        'app/js/app.js': ['coverage']
     },
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['coverage', 'verbose', 'progress'],
+
+    coverageReporter: {
+        type: 'lcov',
+        dir: 'coverage/'
+    },
 
 
     // web server port
@@ -66,5 +72,5 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity
-  })
-}
+  });
+};
