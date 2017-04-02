@@ -1,26 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="mainApp"  lang="en">
 	
 	<!--Contains site metadata and links-->
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>An Inverted Index App</title>
+		<title>An Inverted Index App (Inverdex)</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/index.css">
-		
-	</head>
+    </head>
 	
 	<!--Visible part of page-->
-	<body ng-app="mainApp" ng-controller="MainController"> 
+	<body ng-controller="MainController"> 
 
 		<!--Navigation bar-->
 		<nav class="navbar navbar-inverse navbar-light bg-faded main-nav shadow bg-color">
 			
 			<!--Page heading-->
 			<span>
-				<h3 class="page-heading"><a href="index.html">Inverted Index App </a></h3>
+				<h3 class="page-heading"><a href="index.html">Inverdex</a></h3>
 			</span>
 
             <!-- Navigation links -->
@@ -52,13 +51,13 @@
                             <!-- Modal Header -->
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">About App</h4>
+                                <h4 class="modal-title"><b>About App</b></h4>
                             </div>
 
                             <!-- Modal Body -->
                             <div class="modal-body">
-                                <h4>Inverted Index</h4>
-                                <p>An Inverted Index is an Index Data Structure storing a mapping from content to location (i.e. a mapping of words or numbers to it's location in a database file).
+                                <h4><b>Inverdex</b></h4>
+                                <p>Inverdex is an app that maps words or number to its location in a database file. It implements Index Data Structure storing a mapping from content to location.
                                 This Data Structure is widely used in several scenarios e.g. Cell Phone Lookup (where you have a phonebook which several contacts and you type in a person's number which in turn brings out the contact details of the person associated with that number).</p>
                                 <p>This application builds an index from books in a file and allows you search through the file for words in that book according to the description <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/inverted-index.html" target="_blank"><b>here</b></a>. Also, the application will allow users upload a JSON file with this <a href="https://gist.github.com/q-ode/72019451b98f079a8d737eb7a412bf14" target="_blank"><b>structure.</b></a></p>
                             </div>
@@ -79,12 +78,12 @@
                             <!-- Modal Header -->
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Help</h4>
+                                <h4 class="modal-title"><b>Help</b></h4>
                             </div>
 
                             <!-- Modal body -->
                             <div class="modal-body">
-                                <h4>How to use</h4>
+                                <h4><b>How to use</b></h4>
                                 <ul>
                                 	<li>Click <b>Upload File</b> button to upload valid json file</li>
                                 	<li>Click <b>Create Index</b> button to create index of words from the file</li>
@@ -112,31 +111,41 @@
 				</div>
 
 				<!-- Create index bar -->
-				<div class="create-index-wrapper">
-				    <select type="text" name="fileList" id="file-list"></select>
-				    <button class="create-index btn btn-color" ng-click="createIndex()">Create Index</button>
-				</div>
+				<span class="create-index-wrapper input-group">
+				    <select name="fileList" class="" id="file-list" ng-model="selectedFile">
+				    	<option ng-repeat="(fileName, fileContent) in fileObjects" placeholder="Select a book file">{{fileName}}</option>
+				    </select>
+				    <span>
+				        <button class="create-index btn btn-color" ng-click="createIndex(selectedFile)">Create Index</button>
+				    </span>
+				</span>
 
 				<!-- Search Box -->
-				<form class="search-form pull-right">
-					<input class="search" type="text" placeholder="Type here">
+				<span class="search-form pull-right">
+					<input class="search" type="text" placeholder="Type here" ng-model="query">
 					<input class="btn submit btn-color" type="submit" value="Search Index" ng-submit="invIndex.searchIndex()">
-				</form>
+				</span>
 		</div>
 
 		<!-- Output section -->
-		<div class="container main-section shadow bg-color" ng-controller="TableController">
-			
-			<!-- Output table -->
-			<table>
-			  <tr ng-repeat="out in indexTable" ng-model="tableMsg">
-			  {{tableMsg}}
-			  	
-			  </tr>
-			</table>
-			</div>
-		</div>
+		<div class="container main-section shadow bg-color">
 		
+
+			<!-- Output table -->
+			<table ng-repeat="(fileName, val) in allIndicies" class="table table-striped table-hover">
+			  <p ng-if="invIndex">Creating Index for {{fileName}}</p>
+			  <thead>
+			    <th>Index</th>
+			    <th ng-repeat="eachBook in val.numOfBook">Book {{eachBook+1}}</th>
+			  </thead>
+			    <tr ng-repeat="eachToken in val.uniqueWords">
+			        <td>{{eachToken}}</td>
+			        <td ng-repeat="eachBook in val.numOfBook">
+			          <img ng-src="img/{{ val.numOfBook | imgCheck : val.indexed[eachToken]}}.png" width="20px" height="20px">
+			        </td>
+			    </tr>
+            </table>
+		</div>
 
 		<!--Shared scripts-->
 		<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js'></script>
