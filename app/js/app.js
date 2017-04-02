@@ -14,31 +14,22 @@ class InvertedIndex {
    * @param  {File} file - Uploaded file to be read.
    * @return {void}
    */
-  static readFile(file) {
-    return new Promise ((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        return (objFile) => {
-          const allFileNames = [],
-          fileName = file.name,
-          fileContent = objFile.target.result;
-          try {
-            if (InvertedIndex.validateFile(fileName, fileContent)) {
-              const finalContent = JSON.parse(fileContent);
-              allFileNames.push(fileName);
-            }
-            resolve(fileContent);
-          } catch (err) {
-              reject (err);
-            }
-        };
+  readFile(file) {
+    this.file = file;
+    return new Promise((resolve, reject) => {
+      const bookReader = new FileReader();
+
+      bookReader.onload = evt => resolve(evt.target.result);
+      bookReader.onerror = (evt) => {
+        reject(`Error reading + ${this.file.name}: ${evt.target.result}`);
       };
-      reader.readAsText(file);
-    }); 
+      bookReader.readAsText(this.file);
+    });
   }
-   /**
+  /**
    * Ensures all the documents in a particular file is valid
-   * @param  {Object} file
+   * @param  {String} fileName
+   * @param  {Object} fileContent
    * @return {Boolean} isValid -True or false
    */
   validateFile(fileName, fileContent) {
@@ -47,8 +38,8 @@ class InvertedIndex {
     let isValid = true;
     try {
       const parsedJSON = JSON.parse(JSON.stringify(this.content));
-      isValid = (parsedJSON.length === 0) ? false :
-                (!this.fileName.toLowerCase().match(/\.json$/g)) ? false : isValid;
+      isValid = (parsedJSON.length === 0) ? false : // eslint-disable-line
+        (!this.fileName.toLowerCase().match(/\.json$/g)) ? false : isValid;
       parsedJSON.forEach((key) => {
         if (typeof key.title !== 'string' || typeof key.text !== 'string') {
           isValid = false;
@@ -81,25 +72,24 @@ class InvertedIndex {
    */
   createIndex(fileName, content) {
     const fileIndex = {};
-
     content.forEach((objDoc, index) => {
-      for (const key in objDoc) {
-        const tokens = this.tokenize(objDoc[key]);
-
-        tokens.forEach((token) => {
-          if (fileIndex[token]) {
-            if (fileIndex[token].indexOf(index) === -1) { // Checks for index
-              fileIndex[token].push(index);
+      if (typeof objDoc === 'object') {
+        for (const key in objDoc) {                // eslint-disable-line
+          const tokens = this.tokenize(objDoc[key]);
+          tokens.forEach((token) => {
+            if (fileIndex[token]) {
+              if (fileIndex[token].indexOf(index) === -1) {  // Checks for index
+                fileIndex[token].push(index);
+              }
+            } else {
+              fileIndex[token] = [index];
             }
-          } else {
-            fileIndex[token] = [index];
-          }
-        });
+          });
+        }
       }
     });
-    this.allIndices[fileName] = { words: fileIndex,
-      bookCount: content.length };
-    return this.allIndices[fileName];
+    this.allIndices[fileName] = fileIndex;
+    return true;
   }
   /**
    * Get’s indices created for particular files
@@ -109,27 +99,39 @@ class InvertedIndex {
   getIndex(fileName) {
     return this.allIndices[fileName];
   }
-  /**
+    /**
    * Searches through one or more indices for words
    * @param  {String} fileName -File name
    * @param  {String} query -Input token
    * @return {Object} searchResult
    */
   searchIndex(fileName, query) {
-    const queryTokens = this.tokenize(query),
-      index = this.getIndex(fileName);
-    if (!index) {
-      return `Index with ${fileName} does not exist`;
+    const self = this;
+    let location;
+     if (fileName.length === 0) {
+      location = Object.keys(self.allIndices);
+    } else {
+      location = fileName;
     }
-
-    const searchResult = {
-      words: {},
-      docCount: index.docCount
-    };
+    let finalResult = {};
+    const queryTokens = this.tokenize(query);
+    location.forEach((files) => {
+      const searchResult = {};
+      queryTokens.forEach((elem) => {
+        const fileContent = this.allIndices[files];
+        const fileToken = Object.keys(fileContent);
+        if (fileToken.includes(elem)) {
+          searchResult[elem] = fileContent[elem];
+        } else {
+          searchResult[elem] = [];
+        }
+        finalResult[files] = searchResult;
+      });
+    });
+    return finalResult;
   }
 }
 /** App exported as Node package */
 if (typeof window === 'undefined') {
   module.exports = InvertedIndex;
 }
-
