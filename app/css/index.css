@@ -24,6 +24,10 @@ a{
 #file-list{
 	height: 30px;
 	border: 0;
+
+}
+option{
+	display: block;
 }
 
 .shadow{
@@ -34,7 +38,8 @@ a{
 
 .create-index-wrapper{
 	vertical-align: top;
-	margin-right: 150px;
+	margin-right: 30px;
+	display: inline;
 }
 
 .bg-color{
@@ -82,7 +87,6 @@ a{
 	height: 30px;
 	color: rgb(255,255,255);
 }
-
 
 .main-links li{
 	margin: 20px;
