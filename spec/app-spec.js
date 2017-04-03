@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * Dependencies declared globally
  */
