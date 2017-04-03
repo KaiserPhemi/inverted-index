@@ -65,7 +65,7 @@ describe('createIndex method', () => {
 describe('getIndex method', () => {
   it(`should return index of words and 
     number of books in a json file`, () => {
-    expect().toEqual({ words: { alice: [0],
+    const retObject = { words: { alice: [0],
       in: [0],
       wonderland: [0],
       a: [0],
@@ -73,6 +73,7 @@ describe('getIndex method', () => {
       hole: [0],
       into: [0],
       rabbit: [0] },
-      bookCount: 1 });
+      bookCount: 1 };
+    expect(invIndexInstance.getIndex('other-book')).toEqual(retObject.words);
   });
 });
