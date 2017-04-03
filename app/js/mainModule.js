@@ -11,21 +11,23 @@ const invIndex = new InvertedIndex();
 const MainController = ($scope) => {
   $scope.message = '';
   $scope.fileNames = [];
-  $scope.searchResult = {};
   $scope.fileObjects = {};
   $scope.allIndicies = {};
+  $scope.showIndex = true;
   $scope.fileUpload = (event) => {
     const allUploads = event.target;
     for (let count = 0; count < allUploads.files.length; count += 1) {
-      invIndex.readFile(allUploads.files[count]).then((content) => {
+      const uploadedFile = allUploads.files[count];
+      invIndex.readFile(uploadedFile).then((content) => {
         if (JSON.parse(content)) {
-          $scope.fileObjects[allUploads.files[count].name] = JSON.parse(content);
+          $scope.fileObjects[uploadedFile.name] = JSON
+          .parse(content);
           if ((!$scope.fileNames
-            .includes(allUploads.files[count].name))) {
-            $scope.$apply($scope.fileNames.push(allUploads.files[count].name));
+            .includes(uploadedFile.name))) {
+            $scope.$apply($scope.fileNames.push(uploadedFile.name));
           }
         } else {
-          $scope.message = `${allUploads.files[count].name} 
+          $scope.message = `${uploadedFile.name} 
             is not a valid json file.`;
         }
       });
@@ -36,12 +38,12 @@ const MainController = ($scope) => {
   .addEventListener('change', $scope.fileUpload);
 
   $scope.createIndex = (selectFile) => {
-    const fileContent = $scope.fileObjects[selectFile];
-    let fileName = selectFile;
+    const fileContent = $scope.fileObjects[selectFile],
+      fileName = selectFile;
     if (invIndex.createIndex(fileName, fileContent)) {
       const indexed = invIndex.getIndex(fileName);
-      let uniqueWords = Object.keys(indexed);
-      let numOfBook = $scope.getNumOfBooks(fileName);
+      const uniqueWords = Object.keys(indexed),
+        numOfBook = $scope.getNumOfBooks(fileName);
 
       $scope.allIndicies[fileName] = {
         uniqueWords,
@@ -53,37 +55,37 @@ const MainController = ($scope) => {
   };
   /**
    * Function to get book count in a file
-   * @param  {Object} fileName [description]
-   * @return {[type]}          [description]
+   * @param  {Object} fileName
+   * @return {Array} An array of all files
    */
   $scope.getNumOfBooks = (fileName) => {
-    let fileContent = $scope.fileObjects[fileName],
-    arr = [];
+    const fileContent = $scope.fileObjects[fileName],
+      arr = [];
     for (let i = 0; i < fileContent.length; i += 1) {
       arr.push(i);
     }
     return arr;
   };
   /**
-   * Function to search index
+   * Function to search through index created
+   * @param  {Object} fileName Object pointing to file
+   * @param  {String} query    Search term
+   * @return {Object}          Object containing search result
    */
-  $scope.searchIndex = (term) => {
-    const searched = invIndex.searchIndex(terms);
-
+  $scope.searchIndex = (fileName, query) => {
+    $scope.showindex = false;
+    $scope.searchResult = invIndex.searchIndex();
   };
 };
 /**
  * Function to handle icon display inside table
  * @return {String} String referencing and icon name.
  */
-const rowIcon = () => {
-  return (input, arr) => {
-    if (arr.includes(input)) {
-      return 'cross';
-    } else {
-      return 'dash';
-      }
+const rowIcon = () => (input, arr) => {
+  if (arr.includes(input)) {
+    return 'check';
   }
+  return 'dash';
 };
 MainController.$inject = ['$scope'];
 /**
