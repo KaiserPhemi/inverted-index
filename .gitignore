@@ -13,7 +13,7 @@ npm-debug.log*
 .npm
 
 # Host(macOS) file system essentials
-.DS_Store
+
 
 # Environment variables
 .env
