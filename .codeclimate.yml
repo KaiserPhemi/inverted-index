@@ -2,6 +2,11 @@
 engines:
   csslint:
     enabled: true
+    checks:
+      important:
+        enabled: false
+      box-sizing:
+        enabled: false
   duplication:
     enabled: true
     config:
@@ -24,3 +29,4 @@ ratings:
 exclude_paths:
 - node_modules/
 - spec/
+- out/
