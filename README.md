@@ -1,6 +1,7 @@
 # Inverted Index
 [![Build Status](https://travis-ci.org/andela-oakinwa/inverted-index.svg?branch=development)](https://travis-ci.org/andela-oakinwa/inverted-index)
 [![Code Climate](https://codeclimate.com/github/andela-oakinwa/inverted-index/badges/gpa.svg)](https://codeclimate.com/github/andela-oakinwa/inverted-index)
+[![Issue Count](https://codeclimate.com/github/andela-oakinwa/inverted-index/badges/issue_count.svg)](https://codeclimate.com/github/andela-oakinwa/inverted-index)
 [![Coverage Status](https://coveralls.io/repos/github/andela-oakinwa/inverted-index/badge.svg?branch=development)](https://coveralls.io/github/andela-oakinwa/inverted-index?branch=master)
 
 ## Introduction

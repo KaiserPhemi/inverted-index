@@ -10,8 +10,14 @@ script:
   - npm test
 
 after_success: 'npm run coveralls'
-notifications:
 
-email:
-recipients:
-  - oluwafemi.akinwa@andela.com
+notifications:
+  email:
+    recipients:
+      - oluwafemi.akinwa@andela.com
+      - kaiser.phemi@protonmail.ch
+  slack:
+    rooms:
+      - andela:4wLG6GHqlslAMjUG7g66wusR
+    on_success: change # default: always
+    on_failure: always # default: always
