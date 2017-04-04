@@ -25,8 +25,6 @@ gulp.task('sync', () => {
  * Create a default tasks
  * @param  {String} 'default' Identifier for default task
  * @param  {String} ['sync']  Identifier for browser-sync
- * @param  {[type]} (         [description]
- * @return {[type]}           [description]
  */
 gulp.task('default', ['sync'], () => {
   gulp.watch('app/*.html', pageSync.reload);
