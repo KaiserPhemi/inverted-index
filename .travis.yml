@@ -16,6 +16,8 @@ notifications:
     recipients:
       - oluwafemi.akinwa@andela.com
       - kaiser.phemi@protonmail.ch
-  slack: andela:4wLG6GHqlslAMjUG7g66wusR
+  slack:
+    rooms:
+      - andela:4wLG6GHqlslAMjUG7g66wusR
     on_success: change # default: always
     on_failure: always # default: always
