@@ -36,7 +36,7 @@ option{
 	box-shadow: 0 1px 2px -0.8px;
 }
 
-.create-index-wrapper{
+.create-index-wrapper {
 	vertical-align: top;
 	margin-right: 30px;
 	display: inline;
@@ -53,14 +53,15 @@ option{
 }
 
 /* Page Heading */
-.page-heading{
+.page-heading {
 	margin-bottom: -40px;
 	margin-top: 10px;
 	margin-left: 10px;
 }
-.main-heading{
+.main-heading {
 	display: inline-block;
 }
+
 .header{
 	float: left;
 }
@@ -79,16 +80,16 @@ option{
     transition: 3s; 
 }
 
-.msg {
-    
-}
-
 .msg-bar.fade {
     opacity: 0;
 }
 
+.aside{
+    border-radius: 3px;   
+}
+
 /* control-wrapper */
-.control-wrapper{
+.control-wrapper {
 	display: flex;
 	margin: 0 auto;
 	width: 900px;
