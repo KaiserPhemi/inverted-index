@@ -80,6 +80,6 @@ describe('getIndex method', () => {
       into: [0],
       rabbit: [0] },
       bookCount: 1 };
-    expect(invIndexInstance.getIndex(otherBook)).toEqual(retObject.words);
+    expect(invIndexInstance.getIndex(otherBook)).toEqual(retObject.word);
   });
 });

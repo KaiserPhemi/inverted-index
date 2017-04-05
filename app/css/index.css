@@ -65,22 +65,26 @@ option{
 	float: left;
 }
 
-.search-bar{
+.search-bar {
 	display: inline;
 }
 
-.msg-bar{
+.msg-bar {
 	margin: 0 auto;
+	opacity: 1;
 	width: 900px;
 	margin-bottom: 10px;
-    transition: 2s;
-    -webkit-transition: 1s;
-    opacity: 1;
-
+    -webkit-transition:  3s;
+    -moz-transition:  3s;     
+    transition: 3s; 
 }
 
-.msg{
+.msg {
+    
+}
 
+.msg-bar.fade {
+    opacity: 0;
 }
 
 /* control-wrapper */

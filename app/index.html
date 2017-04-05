@@ -11,7 +11,7 @@
     </head>
 	
 	<!--Visible part of page-->
-	<body ng-controller="MainController"> 
+	<body ng-controller="MainController">
 
 		<!--Navigation bar-->
 		<nav class="navbar navbar-inverse navbar-light bg-faded main-nav shadow bg-color">
@@ -39,7 +39,7 @@
 				<div class="collapse navbar-collapse">
 					<ul class="navbar-nav navbar-right main-links">
 					  <li><a href="#" data-toggle="modal" data-target="#aboutMessage">About App</a></li>
-					  <li><a href="#" data-toggle="modal" data-target="#helpMessage">Help</a></li>
+					  <li><a href="#" data-toggle="modal" data-target="#helpMessage">FAQ</a></li>
 					</ul>
 				</div>
 
@@ -78,7 +78,7 @@
                             <!-- Modal Header -->
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title"><b>Help</b></h4>
+                                <h4 class="modal-title"><b>FAQ</b></h4>
                             </div>
 
                             <!-- Modal body -->
@@ -89,7 +89,8 @@
                                 	<li>After successful upload, select the file from the dropdown list.</li>
                                 	<li>Click <b>Create Index</b> button to create index of words from the file</li>
                                 	<li>Enter a search query in the search box and click <b>Search Index</b> to search for a particular word.</li>
-                                </ul>
+                                </ul><<br>
+                                <h4>Limitations</h4>
                             </div>
 
                             <!-- Modal footer -->
@@ -101,79 +102,91 @@
                 </div>                  
 			</div>
 		</nav>
+    
+    <div>
+      
+      <!-- Aside wrapper -->
+      <div class="aside">
+        <div class="about">
+          <ul>
+            <li>
+              <p>How to use app</p>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
 
-        <!-- Messsage bar -->
-		<div class="msg-bar alert alert-{{word}}" ng-model="message">
-			<div class="msg text-center">{{message}}</div>
-		</div>
+      <div class="col-md-6">
+       <!-- Messsage bar -->
+    		<div class="msg-bar alert alert-{{word}}" ng-model="message">
+    			<div class="msg text-center">{{message}}</div>
+    		</div>
 
-		<!-- Upload, create-index and Search Bar -->
-		<div class="container control-wrapper shadow bg-color">
-				
-				<!-- Upload section -->
-				<div class="btn btn-primary upload">
-					<span class="btn-upload">Upload File</span>
-					<input type="file" class="file-upload" accept=".json" name="files[]" ng-submit="fileUpload()" id="all-files" multiple>
-				</div>
+    		<!-- Upload, create-index and Search Bar wrapper -->
+    		<div class="container control-wrapper shadow bg-color">
+    				
+    				<!-- Upload section -->
+    				<div class="btn btn-primary upload">
+    					<span class="btn-upload">Upload File</span>
+    					<input type="file" class="file-upload" accept=".json" name="files[]" ng-submit="fileUpload()" id="all-files" multiple>
+    				</div>
 
-				<!-- Create index bar -->
-				<span class="create-index-wrapper input-group">
-				    <select name="fileList" class="" id="file-list" ng-model="selectedFile">
-				    	<option value=''>Select a File</option>
-				    	<option ng-repeat="(fileName, fileContent) in fileObjects" placeholder="Select a book file">{{fileName}}</option>
-				    </select>
-				    <span>
-				        <button class="create-index btn btn-color" ng-click="createIndex(selectedFile)">Create Index</button>
-				    </span>
-				</span>
+    				<!-- Create index bar -->
+    				<span class="create-index-wrapper input-group">
+    				    <select name="fileList" class="" id="file-list" ng-model="selectedFile">
+    				    	<option value=''>Select a File</option>
+    				    	<option ng-repeat="(fileName, fileContent) in fileObjects" placeholder="Select a book file">{{fileName}}</option>
+    				    </select>
+    				    <span>
+    				        <button class="create-index btn btn-color" ng-click="createIndex(selectedFile)">Create Index</button>
+    				    </span>
+    				</span>
 
-				<!-- Search Box -->
-				<span class="search-form pull-right">
-					<input class="search" type="text" placeholder="Search here" ng-model="query">
+    				<!-- Search Box -->
+    				<span class="search-form pull-right">
+    					<input class="search" type="text" placeholder="Search here" ng-model="query">
 
-					<select name="fileList" class="" id="file-list" ng-model="selectedFile">
-				    	<option value=''>All</option>
-				    	<option ng-repeat="(filename, fileContent) in allIndicies" placeholder="Select a book file">{{filename}}</option>
-				    </select>
+    					<select name="fileList" class="" id="file-list" ng-model="selectedFile">
+    				    	<option value=''>All</option>
+    				    	<option ng-repeat="(filename, fileContent) in allIndicies" placeholder="Select a book file">{{filename}}</option>
+    				    </select>
 
-					<input class="btn submit btn-color" type="submit" value="Search Index" ng-click="searchIndex(selectedFile, query)">
-				</span>
-		</div>
+    					<input class="btn submit btn-color" type="submit" value="Search Index" ng-click="searchIndex(selectedFile, query)">
+    				</span>
+    		</div>
 
-		<!-- Output section -->
-		<div class="container main-section shadow bg-color">
-		
+    		<!-- Output section -->
+    		<div class="container main-section shadow bg-color">
+    			<!-- Output table -->
+    			<table ng-show="showIndex" ng-repeat="(fileName, val) in allIndicies" class="table table-striped">
+      			  <thead>
+      			    <th>Term(s)</th>
+      			    <th ng-repeat="eachBook in val.numOfBook">Book {{eachBook+1}}</th>
+      			  </thead>
+    			    <tr ng-repeat="eachToken in val.uniqueWords">
+    			        <td>{{eachToken}}</td>
+    			        <td ng-repeat="eachBook in val.numOfBook">
+    			          <img ng-src="img/{{ eachBook | imgCheck : val.indexed[eachToken]}}.png" width="20px" height="20px">
+    			        </td>
+    			    </tr>
+          </table>
 
-			<!-- Output table -->
-			<table ng-show="showIndex" ng-repeat="(fileName, val) in allIndicies" class="table table-striped">
-  			  <thead>
-  			    <th>Term(s)</th>
-  			    <th ng-repeat="eachBook in val.numOfBook">Document {{eachBook+1}}</th>
-  			  </thead>
-			    <tr ng-repeat="eachToken in val.uniqueWords">
-			        <td>{{eachToken}}</td>
-			        <td ng-repeat="eachBook in val.numOfBook">
-			          <img ng-src="img/{{ eachBook | imgCheck : val.indexed[eachToken]}}.png" width="20px" height="20px">
-			        </td>
-			    </tr>
-      </table>
-
-      <table ng-show="!showIndex" ng-repeat="(fileName, val) in searchResult" class="table table-striped">
-			  <thead>
-			    <th>Search Result</th>
-			    <th ng-repeat="(eachToken, vals) in val.numOfBook">Document {{eachBook+1}}</th>
-			  </thead>
-			    <tr ng-repeat="eachToken in val.uniqueWords">
-			        <td>{{eachToken}}</td>
-			        <td ng-repeat="eachBook in val.numOfBook">
-			          <img ng-src="img/{{ eachBook | imgCheck : val.indexed[eachToken]}}.png" width="20px" height="20px">
-			        </td>
-			    </tr>
-      </table>
-
-            
-		</div>
-
+          <table ng-show="!showIndex" ng-repeat="(fileName, val) in searchResult" class="table table-striped">
+    			  <thead>
+    			    <th>Search Result</th>
+    			    <th ng-repeat="(eachToken, vals) in val.numOfBook">Book {{eachBook+1}}</th>
+    			  </thead>
+    			    <tr ng-repeat="eachToken in val.uniqueWords">
+    			        <td>{{eachToken}}</td>
+    			        <td ng-repeat="eachBook in val.numOfBook">
+    			          <img ng-src="img/{{ eachBook | imgCheck : val.indexed[eachToken]}}.png" width="20px" height="20px">
+    			        </td>
+    			    </tr>
+          </table>
+        </div>
+      </div>
+    </div>
 		<!--Shared scripts-->
 		<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js'></script>
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
