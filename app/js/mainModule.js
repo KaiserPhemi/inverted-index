@@ -82,13 +82,12 @@ const MainController = ($scope) => {
    * @param  {String} query    Search term
    * @return {Object}          Object containing search result
    */
-  $scope.searchIndex = (filename, query) => {
-    const indexedTerm = $scope.allIndicies[filename],
-      normQuery = invIndex.tokenize(query);
-    console.log(normQuery);
-    console.log($scope.allIndicies[filename]);
+  $scope.searchIndex = (fileName, query) => {
+    const indexedTerm = $scope.allIndicies[fileName];
     if ($scope.createIndex) {
       $scope.showIndex = false;
+      const searchedObject = invIndex.searchIndex(fileName, query);
+      console.log(searchedObject);
     }
     $scope.word = 'warning';
     $scope.message = 'Index must be created before searching';

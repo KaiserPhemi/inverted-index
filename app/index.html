@@ -103,7 +103,7 @@
 		</nav>
 
         <!-- Messsage bar -->
-		<div class="msg-bar alert shadow alert-{{word}}" ng-model="message">
+		<div class="msg-bar alert alert-{{word}}" ng-model="message">
 			<div class="msg text-center">{{message}}</div>
 		</div>
 
@@ -136,7 +136,7 @@
 				    	<option ng-repeat="(filename, fileContent) in allIndicies" placeholder="Select a book file">{{filename}}</option>
 				    </select>
 
-					<input class="btn submit btn-color" type="submit" value="Search Index" ng-click="searchIndex(filename, query)">
+					<input class="btn submit btn-color" type="submit" value="Search Index" ng-click="searchIndex(selectedFile, query)">
 				</span>
 		</div>
 

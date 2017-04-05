@@ -73,10 +73,14 @@ option{
 	margin: 0 auto;
 	width: 900px;
 	margin-bottom: 10px;
+    transition: 2s;
+    -webkit-transition: 1s;
+    opacity: 1;
+
 }
 
 .msg{
-	clear: both;
+
 }
 
 /* control-wrapper */
