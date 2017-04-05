@@ -37,7 +37,7 @@ class InvertedIndex {
     let isValid = true;
     try {
       const parsed = JSON.parse(JSON.stringify(this.content));
-      isValid = (parsed.length === 0) ||
+      isValid = (parsed.length <= 0) ||
       (!this.fileName.toLowerCase().match(/\.json$/g)) ? false : isValid;
       parsed.forEach((key) => {
         if (typeof key.title !== 'string' || typeof key.text !== 'string') {
@@ -71,24 +71,26 @@ class InvertedIndex {
    */
   createIndex(fileName, content) {
     const fileIndex = {};
-    content.forEach((objDoc, index) => {
-      Object.keys(objDoc).forEach((key) => {
-        if (Object.prototype.hasOwnProperty.call(objDoc, key)) {
-          const tokens = this.tokenize(objDoc[key]);
-          tokens.forEach((token) => {
-            if (fileIndex[token]) {
-              if (fileIndex[token].indexOf(index) === -1) {  // Checks for index
-                fileIndex[token].push(index);
+    if (this.validateFile(fileName, content)) {
+      content.forEach((objDoc, index) => {
+        Object.keys(objDoc).forEach((key) => {
+          if (Object.prototype.hasOwnProperty.call(objDoc, key)) {
+            const tokens = this.tokenize(objDoc[key]);
+            tokens.forEach((token) => {
+              if (fileIndex[token]) {
+                if (fileIndex[token].indexOf(index) === -1) {
+                  fileIndex[token].push(index);
+                }
+              } else {
+                fileIndex[token] = [index];
               }
-            } else {
-              fileIndex[token] = [index];
-            }
-          });
-        }
+            });
+          }
+        });
       });
-    });
-    this.allIndices[fileName] = fileIndex;
-    return true;
+      this.allIndices[fileName] = fileIndex;
+      return true;
+    }
   }
   /**
    * Get’s indices created for particular files

@@ -10,9 +10,9 @@ html, body{
 
 /* Default for all divs */
 div{
-	box-sizing: border-box;
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
+	box-sizing: border-box;
 }
 
 /* All links */
@@ -31,9 +31,9 @@ option{
 }
 
 .shadow{
-	box-shadow: 0 1px 2px -0.8px;
 	-moz-box-shadow: 0 1px 2px -0.8px;
 	-webkit-box-shadow: 0 1px 2px -0.8px;
+	box-shadow: 0 1px 2px -0.8px;
 }
 
 .create-index-wrapper{
@@ -43,13 +43,13 @@ option{
 }
 
 .bg-color{
+	background-color: 'SkyBlue';
 	background-color: rgba(62,159,235,0.2);
 }
 /* Navigation bar */
 .main-nav{
 	height: 60px;
 	border: 0;
-	margin-bottom: 30px;
 }
 
 /* Page Heading */
@@ -60,7 +60,6 @@ option{
 }
 .main-heading{
 	display: inline-block;
-	float: left;
 }
 .header{
 	float: left;
@@ -68,7 +67,16 @@ option{
 
 .search-bar{
 	display: inline;
-	float: right;
+}
+
+.msg-bar{
+	margin: 0 auto;
+	width: 900px;
+	margin-bottom: 10px;
+}
+
+.msg{
+	clear: both;
 }
 
 /* control-wrapper */
@@ -101,7 +109,7 @@ option{
 }
 
 /* Upload button */
-.upload input.file-upload{
+.upload .file-upload{
 	position: absolute;
     top: 0;
     right: 0;
@@ -120,13 +128,10 @@ option{
 }
 
 .btn-color{
+	background-color: 'Blue';
 	background-color: rgb(40,96,144);
 }
 
-/* Search form */
-.search-form{
-	
-}
 
 /* Search input box */
 .search{

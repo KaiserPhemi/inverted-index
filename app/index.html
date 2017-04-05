@@ -7,7 +7,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>An Inverted Index App (Inverdex)</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/index.css">
     </head>
 	
@@ -18,9 +17,7 @@
 		<nav class="navbar navbar-inverse navbar-light bg-faded main-nav shadow bg-color">
 			
 			<!--Page heading-->
-			<span>
-				<h3 class="page-heading"><a href="index.html">Inverdex</a></h3>
-			</span>
+			
 
             <!-- Navigation links -->
 			<div class="container">
@@ -33,11 +30,14 @@
 		                <span class="icon-bar"></span>
 		                <span class="icon-bar"></span>
             		</button>
+            		<span>
+            		  <h3 class="page-heading navbar-brand"><a href="index.html">Inverdex</a></h3>
+					</span>
         		</div>
 
 				<!--Navigation-->
 				<div class="collapse navbar-collapse">
-					<ul class="navbar-nav navbar-right main-links nav-pills">
+					<ul class="navbar-nav navbar-right main-links">
 					  <li><a href="#" data-toggle="modal" data-target="#aboutMessage">About App</a></li>
 					  <li><a href="#" data-toggle="modal" data-target="#helpMessage">Help</a></li>
 					</ul>
@@ -85,7 +85,8 @@
                             <div class="modal-body">
                                 <h4><b>How to use</b></h4>
                                 <ul>
-                                	<li>Click <b>Upload File</b> button to upload valid json file</li>
+                                	<li>Click <b>Upload File</b> button to upload valid json file (file with .json extension)</li>
+                                	<li>After successful upload, select the file from the dropdown list.</li>
                                 	<li>Click <b>Create Index</b> button to create index of words from the file</li>
                                 	<li>Enter a search query in the search box and click <b>Search Index</b> to search for a particular word.</li>
                                 </ul>
@@ -101,8 +102,13 @@
 			</div>
 		</nav>
 
+        <!-- Messsage bar -->
+		<div class="msg-bar alert shadow alert-{{word}}" ng-model="message">
+			<div class="msg text-center">{{message}}</div>
+		</div>
+
 		<!-- Upload, create-index and Search Bar -->
-		<div class="container control-wrapper shadow bg-color" >
+		<div class="container control-wrapper shadow bg-color">
 				
 				<!-- Upload section -->
 				<div class="btn btn-primary upload">
@@ -113,6 +119,7 @@
 				<!-- Create index bar -->
 				<span class="create-index-wrapper input-group">
 				    <select name="fileList" class="" id="file-list" ng-model="selectedFile">
+				    	<option value=''>Select a File</option>
 				    	<option ng-repeat="(fileName, fileContent) in fileObjects" placeholder="Select a book file">{{fileName}}</option>
 				    </select>
 				    <span>
@@ -122,8 +129,14 @@
 
 				<!-- Search Box -->
 				<span class="search-form pull-right">
-					<input class="search" type="text" placeholder="Type here" ng-model="query">
-					<input class="btn submit btn-color" type="submit" value="Search Index" ng-submit="invIndex.searchIndex()">
+					<input class="search" type="text" placeholder="Search here" ng-model="query">
+
+					<select name="fileList" class="" id="file-list" ng-model="selectedFile">
+				    	<option value=''>All</option>
+				    	<option ng-repeat="(filename, fileContent) in allIndicies" placeholder="Select a book file">{{filename}}</option>
+				    </select>
+
+					<input class="btn submit btn-color" type="submit" value="Search Index" ng-click="searchIndex(filename, query)">
 				</span>
 		</div>
 
@@ -132,19 +145,33 @@
 		
 
 			<!-- Output table -->
-			<table ng-repeat="(fileName, val) in allIndicies" class="table table-striped table-hover">
-			  <p ng-if="invIndex">Creating Index for {{fileName}}</p>
+			<table ng-show="showIndex" ng-repeat="(fileName, val) in allIndicies" class="table table-striped">
+  			  <thead>
+  			    <th>Term(s)</th>
+  			    <th ng-repeat="eachBook in val.numOfBook">Document {{eachBook+1}}</th>
+  			  </thead>
+			    <tr ng-repeat="eachToken in val.uniqueWords">
+			        <td>{{eachToken}}</td>
+			        <td ng-repeat="eachBook in val.numOfBook">
+			          <img ng-src="img/{{ eachBook | imgCheck : val.indexed[eachToken]}}.png" width="20px" height="20px">
+			        </td>
+			    </tr>
+      </table>
+
+      <table ng-show="!showIndex" ng-repeat="(fileName, val) in searchResult" class="table table-striped">
 			  <thead>
-			    <th>Index</th>
-			    <th ng-repeat="eachBook in val.numOfBook">Book {{eachBook+1}}</th>
+			    <th>Search Result</th>
+			    <th ng-repeat="(eachToken, vals) in val.numOfBook">Document {{eachBook+1}}</th>
 			  </thead>
 			    <tr ng-repeat="eachToken in val.uniqueWords">
 			        <td>{{eachToken}}</td>
 			        <td ng-repeat="eachBook in val.numOfBook">
-			          <img ng-src="img/{{ val.numOfBook | imgCheck : val.indexed[eachToken]}}.png" width="20px" height="20px">
+			          <img ng-src="img/{{ eachBook | imgCheck : val.indexed[eachToken]}}.png" width="20px" height="20px">
 			        </td>
 			    </tr>
-            </table>
+      </table>
+
+            
 		</div>
 
 		<!--Shared scripts-->

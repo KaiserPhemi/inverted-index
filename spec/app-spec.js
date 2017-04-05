@@ -34,7 +34,7 @@ describe('validateFile', () => {
   });
 
   it('should return `false` for empty files', () => {
-    expect(invIndexInstance.validateFile('books.json', empty)).toBe(false);
+    expect(invIndexInstance.validateFile('empty.json', empty)).toBe(false);
   });
 
   it('should return `false` for invalid file', () => {
@@ -56,8 +56,13 @@ describe('tokenize method', () => {
  */
 describe('createIndex method', () => {
   it('should return `true` if index is created', () => {
-    expect(invIndexInstance.createIndex('other-book', otherBook))
+    expect(invIndexInstance.createIndex('other-book.json', otherBook))
     .toEqual(true);
+  });
+
+  it('should return `false` if index is not created', () => {
+    expect(invIndexInstance.createIndex('empty.json', empty))
+    .toBeFalsy();
   });
 });
 /**
@@ -75,6 +80,6 @@ describe('getIndex method', () => {
       into: [0],
       rabbit: [0] },
       bookCount: 1 };
-    expect(invIndexInstance.getIndex('other-book')).toEqual(retObject.words);
+    expect(invIndexInstance.getIndex(otherBook)).toEqual(retObject.words);
   });
 });
