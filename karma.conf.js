@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Sun Apr 02 2017 07:09:52 GMT+0100 (WAT)
 
-module.exports = function (config) {
+module.exports = (config) => {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -10,7 +10,7 @@ module.exports = function (config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'requirejs'],
+    frameworks: ['jasmine'],
 
 
     // list of files / patterns to load in the browser
@@ -28,14 +28,15 @@ module.exports = function (config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        'app/js/app.js': ['coverage']
+        'app/js/app.js': ['coverage'],
+        'spec/app-spec.js': ['coverage']
     },
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['coverage', 'verbose', 'progress'],
+    reporters: ['progress', 'coverage', 'verbose'],
 
     coverageReporter: {
         type: 'lcov',

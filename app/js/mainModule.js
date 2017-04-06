@@ -9,7 +9,8 @@ const invIndex = new InvertedIndex();
  * @return {Object}        [description]
  */
 const MainController = ($scope) => {
-  $scope.message = '';
+  $scope.message = 'Please upload a valid .json file.';
+  $scope.word = 'success';
   $scope.fileNames = [];
   $scope.fileObjects = {};
   $scope.allIndicies = {};
@@ -22,7 +23,7 @@ const MainController = ($scope) => {
       invIndex.readFile(uploadedFile).then((content) => {
         if (!invIndex.validateFile(singleFileName, JSON.parse(content))) {
           $scope.$apply(() => {
-            $scope.message = `${singleFileName} is not a valid json file.`;
+            $scope.message = `${singleFileName} is not a valid .json file.`;
             $scope.word = 'danger';
             return $scope.message;
           });
@@ -58,9 +59,12 @@ const MainController = ($scope) => {
       };
     }
     if ($scope.allIndicies[fileName]) {
+      $scope.message = `Index created for ${fileName}`;
+      $scope.word = 'success';
       return true;
     }
     $scope.message = 'No index created';
+    $scope.word = 'info';
     $scope.allIndicies = {};
   };
   /**
@@ -87,7 +91,7 @@ const MainController = ($scope) => {
     if ($scope.createIndex) {
       $scope.showIndex = false;
       const searchedObject = invIndex.searchIndex(fileName, query);
-      console.log(searchedObject);
+      console.table(searchedObject);
     }
     $scope.word = 'warning';
     $scope.message = 'Index must be created before searching';

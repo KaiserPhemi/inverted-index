@@ -100,35 +100,40 @@ class InvertedIndex {
   getIndex(fileName) {
     return this.allIndices[fileName];
   }
-    /**
+  /**
    * Searches through one or more indices for words
    * @param  {String} fileName -File name
    * @param  {String} query -Input token
    * @return {Object} searchResult
    */
   searchIndex(fileName, query) {
-    let location;
-    if (fileName.length === 0) {
-      location = Object.keys(this.allIndices);
-    } else {
-      location = fileName;
-    }
-    const finalResult = {};
-    const queryTokens = this.tokenize(query);
-    location.forEach((file) => {
-      const searchResult = {};
-      queryTokens.forEach((elem) => {
-        const fileContent = this.allIndices[file];
-        const fileToken = Object.keys(fileContent);
-        if (fileToken.includes(elem)) {
-          searchResult[elem] = fileContent[elem];
-        } else {
-          searchResult[elem] = [];
+    let searchResult = {},
+      index;
+    this.searchIndices = {};
+    const tokenizedTerms = this.tokenize(query);
+    if (fileName !== 'All') {
+      /** Search single file with fileName */
+      index = this.allIndices[fileName];
+      tokenizedTerms.forEach((term) => {
+        if (index[term]) {
+          searchResult[term] = index[term];
         }
-        finalResult[file] = searchResult;
       });
+      this.searchIndices[fileName] = searchResult;
+      return this.searchIndices;
+    }
+    /** Search all files uploaded */
+    Object.keys(this.allIndices).forEach((file) => {
+      searchResult = {};
+      index = this.allIndices[file];
+      tokenizedTerms.forEach((term) => {
+        if (index[term]) {
+          searchResult[term] = index[term];
+        }
+      });
+      this.searchIndices[file] = searchResult;
     });
-    return finalResult;
+    return this.searchIndices;
   }
 }
 /** App exported as Node package */
