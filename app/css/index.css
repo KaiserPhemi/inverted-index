@@ -43,7 +43,7 @@ option{
 }
 
 .bg-color{
-	background-color: 'SkyBlue';
+	background-color: sky-blue;
 	background-color: rgba(62,159,235,0.2);
 }
 /* Navigation bar */
@@ -141,7 +141,7 @@ option{
 }
 
 .btn-color{
-	background-color: 'Blue';
+	background-color: blue;
 	background-color: rgb(40,96,144);
 }
 
