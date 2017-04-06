@@ -91,7 +91,6 @@ const MainController = ($scope) => {
     if ($scope.createIndex) {
       $scope.showIndex = false;
       const searchedObject = invIndex.searchIndex(fileName, query);
-      console.table(searchedObject);
     }
     $scope.word = 'warning';
     $scope.message = 'Index must be created before searching';
