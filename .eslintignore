@@ -2,3 +2,5 @@
 gulpfile.js
 karma.conf.js
 gulpfile.js
+out/
+server.js
