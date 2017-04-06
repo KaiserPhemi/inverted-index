@@ -107,14 +107,14 @@ class InvertedIndex {
    * @return {Object} searchResult
    */
   searchIndex(fileName, query) {
-    let searchResult = {},
-      index;
+    const searchResult = {};
+    let index;
     this.searchIndices = {};
-    const tokenizedTerms = this.tokenize(query);
+    const tokenized = this.tokenize(query);
     if (fileName !== 'All') {
       /** Search single file with fileName */
       index = this.allIndices[fileName];
-      tokenizedTerms.forEach((term) => {
+      tokenized.forEach((term) => {
         if (index[term]) {
           searchResult[term] = index[term];
         }
@@ -124,9 +124,8 @@ class InvertedIndex {
     }
     /** Search all files uploaded */
     Object.keys(this.allIndices).forEach((file) => {
-      searchResult = {};
       index = this.allIndices[file];
-      tokenizedTerms.forEach((term) => {
+      tokenized.forEach((term) => {
         if (index[term]) {
           searchResult[term] = index[term];
         }
