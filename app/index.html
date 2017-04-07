@@ -1,43 +1,43 @@
 <!DOCTYPE html>
 <html ng-app="mainApp"  lang="en">
-	
-	<!--Contains site metadata and links-->
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>An Inverted Index App (Inverdex)</title>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/index.css">
-    </head>
-	
-	<!--Visible part of page-->
-	<body ng-controller="MainController">
+  
+  <!--Contains site metadata and links-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>An Inverted Index App (Inverdex)</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+  </head>
+  
+  <!--Visible part of page-->
+  <body ng-controller="MainController">
 
-		<!--Navigation bar-->
-		<nav class="navbar navbar-inverse navbar-light bg-faded main-nav shadow bg-color">
+    <!--Navigation bar-->
+    <nav class="navbar navbar-inverse navbar-light bg-faded main-nav shadow bg-color">
       <!-- Navigation links -->
-			<div class="container">
-				
-				<!-- Hamburger menu for links -->
-				<div class="navbar-header">
-      		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".main-links" aria-expanded="false">
+      <div class="container">
+        
+        <!-- Hamburger menu for links -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".main-links" aria-expanded="false">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
-      		</button>
-      		<span> <!--Page heading-->
-      		  <h3 class="page-heading navbar-brand"><a href="index.html">Inverdex</a></h3>
-		      </span>
+          </button>
+          <span> <!--Page heading-->
+            <h3 class="page-heading navbar-brand"><a href="index.html">Inverdex</a></h3>
+          </span>
         </div>
 
-				<!--Navigation buttons-->
-				<div class="collapse navbar-collapse">
-					<ul class="navbar-nav navbar-right main-links">
-					  <li><a href="#" data-toggle="modal" data-target="#aboutMessage">About App</a></li>
-					  <li><a href="#" data-toggle="modal" data-target="#helpMessage">FAQ</a></li>
-					</ul>
-				</div>
+        <!--Navigation buttons-->
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav navbar-right main-links">
+            <li><a href="#" data-toggle="modal" data-target="#aboutMessage">About App</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#helpMessage">FAQ</a></li>
+          </ul>
+        </div>
 
                 <!-- About modal -->
                 <div class="modal fade" id="aboutMessage" role="dialog" aria-hidden="true">
@@ -81,11 +81,11 @@
                             <div class="modal-body">
                                 <h4><b>Frequently Asked Questions</b></h4>
                                 <ul>
-                                	<li>
+                                  <li>
                                     <i><b>Is this an Open Source project?</b></i>
                                     <p>Yes. This is an Open Source project.</p>
                                   </li>
-                                	<li>
+                                  <li>
                                     <i><b>Would there be a subscription model any time soon?</b></i>
                                     <p>At the moment, we're interested in creating a better user experience for our users.</p>
                                   </li>
@@ -107,9 +107,10 @@
                         </div>
                     </div>
                 </div>                  
-			</div>
-		</nav>
+      </div>
+    </nav>
     
+    <!-- Main app page -->
     <div class="row">
       <!-- Aside wrapper -->
       <div class="col-sm-4 aside bg-color shadow">
@@ -136,81 +137,83 @@
       <!-- Table and button wrapper -->
       <div class="col-sm-8">
        <!-- Messsage bar -->
-    		<div class="msg-bar alert alert-{{word}}" ng-model="message">
-    			<div class="msg text-center">{{message}}</div>
-    		</div>
+        <div class="msg-bar alert alert-{{word}}" ng-model="message">
+          <div class="msg text-center"><b>{{message}}</b></div>
+        </div>
 
-    		<!-- Upload, create-index and Search Bar wrapper -->
-    		<div class="container control-wrapper shadow bg-color">
-    				
-    				<!-- Upload section -->
-    				<div class="btn btn-primary upload">
-    					<span class="btn-upload">Upload File</span>
-    					<input type="file" class="file-upload" accept=".json" name="files[]" ng-submit="fileUpload()" id="all-files" multiple>
-    				</div>
+        <!-- Upload, create-index and Search Bar wrapper -->
+        <div class="container control-wrapper shadow bg-color">
+            
+            <!-- Upload section -->
+            <div class="btn btn-primary upload">
+              <span class="btn-upload">Upload File</span>
+              <input type="file" class="file-upload" accept=".json" name="files[]" ng-submit="fileUpload()" id="all-files" multiple>
+            </div>
 
-    				<!-- Create index bar -->
-    				<span class="create-index-wrapper input-group">
-    				    <select name="fileList" class="" id="file-list" ng-model="selectedFile">
-    				    	<option value=''>Select a File</option>
-    				    	<option ng-repeat="(fileName, fileContent) in fileObjects" placeholder="Select a book file">{{fileName}}</option>
-    				    </select>
-    				    <span>
-    				        <button class="create-index btn btn-color" ng-click="createIndex(selectedFile)">Create Index</button>
-    				    </span>
-    				</span>
+            <!-- Create index bar -->
+            <span class="create-index-wrapper input-group">
+                <select name="fileList" class="" id="file-list" ng-model="selectedFile">
+                  <option value=''>Select a File</option>
+                  <option ng-repeat="(fileName, fileContent) in fileObjects" placeholder="Select a book file">{{fileName}}</option>
+                </select>
+                <span>
+                    <button class="create-index btn btn-color" ng-click="createIndex(selectedFile)">Create Index</button>
+                </span>
+            </span>
 
-    				<!-- Search Box -->
-    				<span ng-show="allIndicies" class="search-form pull-right">
-    					<input class="search" type="text" placeholder="Search here" ng-model="query">
+            <!-- Search index wrapper -->
+            <span ng-show="allIndicies" class="search-form pull-right">
+              <input class="search" type="text" placeholder="Search here" ng-model="query">
 
-    					<select name="fileList" class="" id="file-list" ng-model="selectedFile">
-    				    	<option value=''>All</option>
-    				    	<option ng-repeat="(filename, fileContent) in allIndicies" placeholder="Select a book file">{{filename}}</option>
-    				    </select>
+              <select name="fileList" class="" id="file-list" ng-model="selectedFile">
+                  <option value=''>All</option>
+                  <option ng-repeat="(filename, fileContent) in allIndicies" placeholder="Select a book file">{{filename}}</option>
+                </select>
 
-    					<input class="btn submit btn-color" type="submit" value="Search Index" ng-click="searchIndex(selectedFile, query)">
-    				</span>
-    		</div>
+              <input class="btn submit btn-color" type="submit" value="Search Index" ng-click="searchIndex(selectedFile, query)">
+            </span>
+        </div>
 
-    		<!-- Output section -->
-    		<div class="container main-section shadow bg-color">
-    			<!-- Output table -->
-    			<table ng-show="showIndex" ng-repeat="(fileName, val) in allIndicies" class="table table-striped">
-      			  <thead>
-      			    <th>Term(s)</th>
-      			    <th ng-repeat="eachBook in val.numOfBook">Book {{eachBook+1}}</th>
-      			  </thead>
-    			    <tr ng-repeat="eachToken in val.uniqueWords">
-    			        <td>{{eachToken}}</td>
-    			        <td ng-repeat="eachBook in val.numOfBook">
-    			          <img ng-src="img/{{ eachBook | imgCheck : val.indexed[eachToken]}}.png" width="20px" height="20px">
-    			        </td>
-    			    </tr>
+        <!-- Output section -->
+        <div class="container main-section shadow bg-color">
+          
+          <!-- Create index output table -->
+          <table ng-show="showIndex" ng-repeat="(fileName, val) in allIndicies" class="table table-striped">
+              <thead>
+                <th>Term(s)</th>
+                <th ng-repeat="eachBook in val.numOfBook">Book {{eachBook+1}}</th>
+              </thead>
+              <tr ng-repeat="eachToken in val.uniqueWords">
+                  <td>{{eachToken}}</td>
+                  <td ng-repeat="eachBook in val.numOfBook">
+                    <img ng-src="img/{{ eachBook | imgCheck : val.indexed[eachToken]}}.png" width="20px" height="20px">
+                  </td>
+              </tr>
           </table>
 
-          <table ng-show="!showIndex" ng-repeat="(fileName, val) in searchResult" class="table table-striped">
-    			  <thead>
-    			    <th>Search Result</th>
-    			    <th ng-repeat="(eachToken, vals) in val.numOfBook">Book {{eachBook+1}}</th>
-    			  </thead>
-    			    <tr ng-repeat="eachToken in val.uniqueWords">
-    			        <td>{{eachToken}}</td>
-    			        <td ng-repeat="eachBook in val.numOfBook">
-    			          <img ng-src="img/{{ eachBook | imgCheck : val.indexed[eachToken]}}.png" width="20px" height="20px">
-    			        </td>
-    			    </tr>
+          <!-- Search index output table -->
+          <table ng-show="!showIndex" ng-repeat="(fileName, val) in searchedIndices.searched" class="table table-striped">
+            <thead>
+              <th>Term(s)</th>
+              <th ng-repeat="eachBook in searchedIndices.totalBooks">Book {{eachBook+1}}</th>
+            </thead>
+              <tr ng-repeat="(eachToken, result) in val">
+                  <td>{{eachToken}}</td>
+                  <td ng-repeat="eachBook in searchedIndices.totalBooks">
+                    <img ng-src="img/{{ eachBook | imgCheck : result}}.png" width="20px" height="20px">
+                  </td>
+              </tr>
           </table>
         </div>
       </div>
     </div>
-		<!--Shared scripts-->
-		<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js'></script>
-		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--Shared scripts-->
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js'></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-		<!--Custom scripts-->
-		<script src="js/app.js"></script>
-		<script src="js/mainModule.js"></script>
-	</body>
+    <!--Custom scripts-->
+    <script src="js/app.js"></script>
+    <script src="js/mainModule.js"></script>
+  </body>
 </html>
