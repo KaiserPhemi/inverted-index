@@ -106,31 +106,24 @@ class InvertedIndex {
    * @param  {String} query -Input token
    * @return {Object} searchResult
    */
-  searchIndex(fileName, query) {
-    const searchResult = {};
+  searchIndex(fileArr, query) {
     let index;
     this.searchIndices = {};
     const tokenized = this.tokenize(query);
-    if (fileName !== 'All') {
-      /** Search single file with fileName */
+    if (!fileArr) {
+      fileArr = Object.keys(this.allIndices);
+    }
+    fileArr.forEach((fileName) => {
+      const searchResult = {};
       index = this.allIndices[fileName];
-      tokenized.forEach((term) => {
-        if (index[term]) {
-          searchResult[term] = index[term];
+      tokenized.forEach((word) => {
+        if (index[word]) {
+          searchResult[word] = index[word];
+        } else {
+          searchResult[word] = [];
         }
       });
       this.searchIndices[fileName] = searchResult;
-      return this.searchIndices;
-    }
-    /** Search all files uploaded */
-    Object.keys(this.allIndices).forEach((file) => {
-      index = this.allIndices[file];
-      tokenized.forEach((term) => {
-        if (index[term]) {
-          searchResult[term] = index[term];
-        }
-      });
-      this.searchIndices[file] = searchResult;
     });
     return this.searchIndices;
   }

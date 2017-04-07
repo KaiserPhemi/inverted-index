@@ -10,10 +10,9 @@ const invIndex = new InvertedIndex();
  */
 const MainController = ($scope) => {
   $scope.message = 'Please upload a valid .json file.';
-  $scope.word = 'success';
+  $scope.word = 'info';
   $scope.fileNames = [];
   $scope.fileObjects = {};
-  $scope.allIndicies = {};
   $scope.showIndex = true;
   $scope.fileUpload = (event) => {
     const allUploads = event.target;
@@ -49,6 +48,7 @@ const MainController = ($scope) => {
     const fileContent = $scope.fileObjects[selectFile],
       fileName = selectFile;
     if (invIndex.createIndex(fileName, fileContent)) {
+      $scope.allIndicies = {};
       const indexed = invIndex.getIndex(fileName),
         uniqueWords = Object.keys(indexed),
         numOfBook = $scope.getNumOfBooks(fileName);
@@ -87,13 +87,26 @@ const MainController = ($scope) => {
    * @return {Object}          Object containing search result
    */
   $scope.searchIndex = (fileName, query) => {
-    const indexedTerm = $scope.allIndicies[fileName];
+    const fileArr = [];
+    const queriedWords = invIndex.tokenize(query).toString();
+    fileArr.push(fileName);
     if ($scope.createIndex) {
       $scope.showIndex = false;
-      const searchedObject = invIndex.searchIndex(fileName, query);
+      $scope.searchedIndices = {};
+      const searched = invIndex.searchIndex(fileArr, query),
+        books = Object.keys(searched),
+        totalBooks = $scope.getNumOfBooks(fileName);
+      $scope.searchedIndices = {
+        books,
+        totalBooks,
+        searched
+      };
     }
-    $scope.word = 'warning';
-    $scope.message = 'Index must be created before searching';
+    if ($scope.searchedIndices) {
+      $scope.message = `Search Index created for word(s) '${queriedWords}'`;
+      $scope.word = 'success';
+      return true;
+    }
   };
 };
 /**
