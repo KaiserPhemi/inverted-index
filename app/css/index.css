@@ -10,9 +10,9 @@ html, body{
 
 /* Default for all divs */
 div{
-	box-sizing: border-box;
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
+	box-sizing: border-box;
 }
 
 /* All links */
@@ -31,48 +31,70 @@ option{
 }
 
 .shadow{
-	box-shadow: 0 1px 2px -0.8px;
 	-moz-box-shadow: 0 1px 2px -0.8px;
 	-webkit-box-shadow: 0 1px 2px -0.8px;
+	box-shadow: 0 1px 2px -0.8px;
 }
 
-.create-index-wrapper{
+.create-index-wrapper {
 	vertical-align: top;
 	margin-right: 30px;
 	display: inline;
 }
 
 .bg-color{
+	background-color: skyblue;
 	background-color: rgba(62,159,235,0.2);
 }
 /* Navigation bar */
 .main-nav{
 	height: 60px;
 	border: 0;
-	margin-bottom: 30px;
 }
 
 /* Page Heading */
-.page-heading{
+.page-heading {
 	margin-bottom: -40px;
 	margin-top: 10px;
 	margin-left: 10px;
 }
-.main-heading{
+.main-heading {
 	display: inline-block;
-	float: left;
 }
+
 .header{
 	float: left;
 }
 
-.search-bar{
+.search-bar {
 	display: inline;
-	float: right;
+}
+
+.msg-bar {
+	margin: 0 auto;
+	opacity: 1;
+	width: 900px;
+	margin-bottom: 5px;
+    -webkit-transition:  3s;
+    -moz-transition:  3s; 
+    -o-transition: 3s;    
+    transition: 3s; 
+}
+
+.msg-bar.fade {
+    opacity: 0;
+}
+
+.aside{
+    border-radius: 3px; 
+    margin-left: 50px;
+    width: 500px;
+    height: 100%;
+    font-size: 0.9em;
 }
 
 /* control-wrapper */
-.control-wrapper{
+.control-wrapper {
 	display: flex;
 	margin: 0 auto;
 	width: 900px;
@@ -101,7 +123,7 @@ option{
 }
 
 /* Upload button */
-.upload input.file-upload{
+.upload .file-upload{
 	position: absolute;
     top: 0;
     right: 0;
@@ -120,13 +142,10 @@ option{
 }
 
 .btn-color{
+	background-color: blue;
 	background-color: rgb(40,96,144);
 }
 
-/* Search form */
-.search-form{
-	
-}
 
 /* Search input box */
 .search{

@@ -37,7 +37,7 @@ class InvertedIndex {
     let isValid = true;
     try {
       const parsed = JSON.parse(JSON.stringify(this.content));
-      isValid = (parsed.length === 0) ||
+      isValid = (parsed.length <= 0) ||
       (!this.fileName.toLowerCase().match(/\.json$/g)) ? false : isValid;
       parsed.forEach((key) => {
         if (typeof key.title !== 'string' || typeof key.text !== 'string') {
@@ -71,24 +71,26 @@ class InvertedIndex {
    */
   createIndex(fileName, content) {
     const fileIndex = {};
-    content.forEach((objDoc, index) => {
-      Object.keys(objDoc).forEach((key) => {
-        if (Object.prototype.hasOwnProperty.call(objDoc, key)) {
-          const tokens = this.tokenize(objDoc[key]);
-          tokens.forEach((token) => {
-            if (fileIndex[token]) {
-              if (fileIndex[token].indexOf(index) === -1) {  // Checks for index
-                fileIndex[token].push(index);
+    if (this.validateFile(fileName, content)) {
+      content.forEach((objDoc, index) => {
+        Object.keys(objDoc).forEach((key) => {
+          if (Object.prototype.hasOwnProperty.call(objDoc, key)) {
+            const tokens = this.tokenize(objDoc[key]);
+            tokens.forEach((token) => {
+              if (fileIndex[token]) {
+                if (fileIndex[token].indexOf(index) === -1) {
+                  fileIndex[token].push(index);
+                }
+              } else {
+                fileIndex[token] = [index];
               }
-            } else {
-              fileIndex[token] = [index];
-            }
-          });
-        }
+            });
+          }
+        });
       });
-    });
-    this.allIndices[fileName] = fileIndex;
-    return true;
+      this.allIndices[fileName] = fileIndex;
+      return true;
+    }
   }
   /**
    * Get’s indices created for particular files
@@ -98,35 +100,32 @@ class InvertedIndex {
   getIndex(fileName) {
     return this.allIndices[fileName];
   }
-    /**
+  /**
    * Searches through one or more indices for words
    * @param  {String} fileName -File name
    * @param  {String} query -Input token
    * @return {Object} searchResult
    */
-  searchIndex(fileName, query) {
-    let location;
-    if (fileName.length === 0) {
-      location = Object.keys(this.allIndices);
-    } else {
-      location = fileName;
+  searchIndex(fileArr, query) {
+    let index;
+    this.searchIndices = {};
+    const tokenized = this.tokenize(query);
+    if (!fileArr) {
+      fileArr = Object.keys(this.allIndices);
     }
-    const finalResult = {};
-    const queryTokens = this.tokenize(query);
-    location.forEach((file) => {
+    fileArr.forEach((fileName) => {
       const searchResult = {};
-      queryTokens.forEach((elem) => {
-        const fileContent = this.allIndices[file];
-        const fileToken = Object.keys(fileContent);
-        if (fileToken.includes(elem)) {
-          searchResult[elem] = fileContent[elem];
+      index = this.allIndices[fileName];
+      tokenized.forEach((word) => {
+        if (index[word]) {
+          searchResult[word] = index[word];
         } else {
-          searchResult[elem] = [];
+          searchResult[word] = [];
         }
-        finalResult[file] = searchResult;
       });
+      this.searchIndices[fileName] = searchResult;
     });
-    return finalResult;
+    return this.searchIndices;
   }
 }
 /** App exported as Node package */

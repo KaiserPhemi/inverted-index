@@ -9,26 +9,32 @@ const invIndex = new InvertedIndex();
  * @return {Object}        [description]
  */
 const MainController = ($scope) => {
-  $scope.message = '';
+  $scope.message = 'Please upload a valid .json file.';
+  $scope.word = 'info';
   $scope.fileNames = [];
   $scope.fileObjects = {};
-  $scope.allIndicies = {};
   $scope.showIndex = true;
   $scope.fileUpload = (event) => {
     const allUploads = event.target;
     for (let count = 0; count < allUploads.files.length; count += 1) {
-      const uploadedFile = allUploads.files[count];
+      const uploadedFile = allUploads.files[count],
+        singleFileName = uploadedFile.name;
       invIndex.readFile(uploadedFile).then((content) => {
-        if (JSON.parse(content)) {
-          $scope.fileObjects[uploadedFile.name] = JSON
-          .parse(content);
-          if ((!$scope.fileNames
-            .includes(uploadedFile.name))) {
-            $scope.$apply($scope.fileNames.push(uploadedFile.name));
-          }
+        if (!invIndex.validateFile(singleFileName, JSON.parse(content))) {
+          $scope.$apply(() => {
+            $scope.message = `${singleFileName} is not a valid .json file.`;
+            $scope.word = 'danger';
+            return $scope.message;
+          });
         } else {
-          $scope.message = `${uploadedFile.name} 
-            is not a valid json file.`;
+          $scope.message = 'Upload successfull';
+          $scope.word = 'success';
+          $scope.fileObjects[singleFileName] = JSON
+            .parse(content);
+          if ((!$scope.fileNames
+              .includes(uploadedFile.name))) {
+            $scope.$apply(() => $scope.fileNames.push(uploadedFile.name));
+          }
         }
       });
     }
@@ -38,20 +44,28 @@ const MainController = ($scope) => {
   .addEventListener('change', $scope.fileUpload);
 
   $scope.createIndex = (selectFile) => {
+    $scope.showIndex = true;
     const fileContent = $scope.fileObjects[selectFile],
       fileName = selectFile;
     if (invIndex.createIndex(fileName, fileContent)) {
-      const indexed = invIndex.getIndex(fileName);
-      const uniqueWords = Object.keys(indexed),
+      $scope.allIndicies = {};
+      const indexed = invIndex.getIndex(fileName),
+        uniqueWords = Object.keys(indexed),
         numOfBook = $scope.getNumOfBooks(fileName);
-
       $scope.allIndicies[fileName] = {
         uniqueWords,
         numOfBook,
         indexed
       };
     }
-    return true;
+    if ($scope.allIndicies[fileName]) {
+      $scope.message = `Index created for ${fileName}`;
+      $scope.word = 'success';
+      return true;
+    }
+    $scope.message = 'No index created';
+    $scope.word = 'info';
+    $scope.allIndicies = {};
   };
   /**
    * Function to get book count in a file
@@ -73,8 +87,26 @@ const MainController = ($scope) => {
    * @return {Object}          Object containing search result
    */
   $scope.searchIndex = (fileName, query) => {
-    $scope.showindex = false;
-    $scope.searchResult = invIndex.searchIndex();
+    const fileArr = [];
+    const queriedWords = invIndex.tokenize(query).toString();
+    fileArr.push(fileName);
+    if ($scope.createIndex) {
+      $scope.showIndex = false;
+      $scope.searchedIndices = {};
+      const searched = invIndex.searchIndex(fileArr, query),
+        books = Object.keys(searched),
+        totalBooks = $scope.getNumOfBooks(fileName);
+      $scope.searchedIndices = {
+        books,
+        totalBooks,
+        searched
+      };
+    }
+    if ($scope.searchedIndices) {
+      $scope.message = `Search Index created for word(s) '${queriedWords}'`;
+      $scope.word = 'success';
+      return true;
+    }
   };
 };
 /**

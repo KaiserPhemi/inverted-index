@@ -10,7 +10,7 @@ Inverted index takes a JSON array of text objects and creates an index from the 
 ## Key Features
 * Supports Upload of JSON file created following the format displayed below:
 
-```
+```json
 [
     {"title": "Voltron",
     "text":"Defender of the Universe."
@@ -23,6 +23,9 @@ Inverted index takes a JSON array of text objects and creates an index from the 
 * Creates an Index for any selected JSON file.
 
 * Searching of a specific JSON file or all indexed JSON files.
+
+## App Link
+* [Inverdex](https://inverdex-staging.herokuapp.com/)
 
 ## Local Installation Guide
 * Clone the repository
