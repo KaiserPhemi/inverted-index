@@ -113,7 +113,7 @@ const MainController = ($scope) => {
  * Function to handle icon display inside table
  * @return {String} String referencing and icon name.
  */
-const rowIcon = () => (input, arr) => {
+const tableIcon = () => (input, arr) => {
   if (arr.includes(input)) {
     return 'check';
   }
@@ -125,4 +125,4 @@ MainController.$inject = ['$scope'];
  */
 angular.module('mainApp', [])
 .controller('MainController', MainController)
-.filter('imgCheck', rowIcon);
+.filter('iconCheck', tableIcon);

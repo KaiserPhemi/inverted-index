@@ -186,7 +186,7 @@
               <tr ng-repeat="eachToken in val.uniqueWords">
                   <td>{{eachToken}}</td>
                   <td ng-repeat="eachBook in val.numOfBook">
-                    <img ng-src="img/{{ eachBook | imgCheck : val.indexed[eachToken]}}.png" width="20px" height="20px">
+                    <img ng-src="img/{{ eachBook | iconCheck : val.indexed[eachToken]}}.png" width="20px" height="20px">
                   </td>
               </tr>
           </table>
@@ -200,7 +200,7 @@
               <tr ng-repeat="(eachToken, result) in val">
                   <td>{{eachToken}}</td>
                   <td ng-repeat="eachBook in searchedIndices.totalBooks">
-                    <img ng-src="img/{{ eachBook | imgCheck : result}}.png" width="20px" height="20px">
+                    <img ng-src="img/{{ eachBook | iconCheck : result}}.png" width="20px" height="20px">
                   </td>
               </tr>
           </table>
