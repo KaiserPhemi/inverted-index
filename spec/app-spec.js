@@ -3,7 +3,7 @@
  * Dependencies declared globally
  */
 const InvertedIndex = require('../app/js/app.js'),
-  invIndexInstance = new InvertedIndex(),
+  invIndex = new InvertedIndex(),
   badFormat = require('./books/bad-format.json'),
   empty = require('./books/empty.json'),
   book = require('./books/books.json'),
@@ -21,8 +21,8 @@ describe('InvertedIndex class', () => {
  */
 describe('Constructor', () => {
   it('should be able to create an instance of InvertedIndex class', () => {
-    expect(typeof invIndexInstance).toBe('object');
-    expect(invIndexInstance instanceof InvertedIndex).toBe(true);
+    expect(typeof invIndex).toBe('object');
+    expect(invIndex instanceof InvertedIndex).toBe(true);
   });
 });
 /**
@@ -30,15 +30,15 @@ describe('Constructor', () => {
  */
 describe('validateFile', () => {
   it('should return `true` for valid json file', () => {
-    expect(invIndexInstance.validateFile('books.json', book)).toBe(true);
+    expect(invIndex.validateFile('books.json', book)).toBe(true);
   });
 
   it('should return `false` for empty files', () => {
-    expect(invIndexInstance.validateFile('empty.json', empty)).toBe(false);
+    expect(invIndex.validateFile('empty.json', empty)).toBe(false);
   });
 
   it('should return `false` for invalid file', () => {
-    expect(invIndexInstance.validateFile('bad-format', badFormat)).toBe(false);
+    expect(invIndex.validateFile('bad-format', badFormat)).toBe(false);
   });
 });
 /**
@@ -47,7 +47,7 @@ describe('validateFile', () => {
 describe('tokenize method', () => {
   it(`should return array of unique words
    without whitespace/characters`, () => {
-    expect(invIndexInstance.tokenize(book[0].title))
+    expect(invIndex.tokenize(book[0].title))
     .toEqual(['alice', 'in', 'wonderland']);
   });
 });
@@ -56,12 +56,12 @@ describe('tokenize method', () => {
  */
 describe('createIndex method', () => {
   it('should return `true` if index is created', () => {
-    expect(invIndexInstance.createIndex('other-book.json', otherBook))
+    expect(invIndex.createIndex('other-book.json', otherBook))
     .toEqual(true);
   });
 
   it('should return `false` if index is not created', () => {
-    expect(invIndexInstance.createIndex('empty.json', empty))
+    expect(invIndex.createIndex('empty.json', empty))
     .toBeFalsy();
   });
 });
@@ -80,6 +80,6 @@ describe('getIndex method', () => {
       into: [0],
       rabbit: [0] },
       bookCount: 1 };
-    expect(invIndexInstance.getIndex(otherBook)).toEqual(retObject.word);
+    expect(invIndex.getIndex(otherBook)).toEqual(retObject.word);
   });
 });
