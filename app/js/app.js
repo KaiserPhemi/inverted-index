@@ -102,7 +102,7 @@ class InvertedIndex {
   }
   /**
    * Searches through one or more indices for words
-   * @param  {String} fileName -File name
+   * @param  {String} fileArr -File array
    * @param  {String} query -Input token
    * @return {Object} searchResult
    */
