@@ -51,10 +51,10 @@ const MainController = ($scope) => {
       $scope.allIndicies = {};
       const indexed = invIndex.getIndex(fileName),
         uniqueWords = Object.keys(indexed),
-        numOfBook = $scope.getNumOfBooks(fileName);
+        totalBooks = $scope.getTotalBooks(fileName);
       $scope.allIndicies[fileName] = {
         uniqueWords,
-        numOfBook,
+        totalBooks,
         indexed
       };
     }
@@ -72,7 +72,7 @@ const MainController = ($scope) => {
    * @param  {Object} fileName
    * @return {Array} An array of all files
    */
-  $scope.getNumOfBooks = (fileName) => {
+  $scope.getTotalBooks = (fileName) => {
     const fileContent = $scope.fileObjects[fileName],
       arr = [];
     for (let i = 0; i < fileContent.length; i += 1) {
@@ -95,7 +95,7 @@ const MainController = ($scope) => {
       $scope.searchedIndices = {};
       const searched = invIndex.searchIndex(fileArr, query),
         books = Object.keys(searched),
-        totalBooks = $scope.getNumOfBooks(fileName);
+        totalBooks = $scope.getTotalBooks(fileName);
       $scope.searchedIndices = {
         books,
         totalBooks,
