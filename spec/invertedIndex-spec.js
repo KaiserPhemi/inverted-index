@@ -56,7 +56,7 @@ describe('tokenize method', () => {
  */
 describe('createIndex method', () => {
   it('should return `true` if index is created', () => {
-    expect(invIndex.createIndex('other-book.json', otherBook))
+    expect(invIndex.createIndex('otherBook.json', otherBook))
     .toEqual(true);
   });
 
@@ -87,7 +87,9 @@ describe('getIndex method', () => {
  * Test case for searchIndex method
  */
 describe('searchIndex method', () => {
-  it('should return a table of searched index from an index created', () => {
+  it(`should return an object 
+    containing searched index from an index created`, () => {
+    const query = 'in';
     const retObject = { words: { alice: [0],
         in: [0],
         wonderland: [0],
@@ -97,8 +99,25 @@ describe('searchIndex method', () => {
         into: [0],
         rabbit: [0] },
         bookCount: 1 },
-      query = 'in';
+      searchResult = { 'otherBook.json': { in: [0] } };
     expect(invIndex.searchIndex(retObject.word, query))
-    .toEqual({ otherBook.json: { in: [0] } });
+    .toEqual(searchResult);
+  });
+
+  it(`should return an object
+      with empty array indicating query not found in index created`, () => {
+    const query = 'femi';
+    const retObject = { words: { alice: [0],
+        in: [0],
+        wonderland: [0],
+        a: [0],
+        falls: [0],
+        hole: [0],
+        into: [0],
+        rabbit: [0] },
+        bookCount: 1 },
+      searchResult = { 'otherBook.json': { femi: [] } };
+    expect(invIndex.searchIndex(retObject.word, query))
+    .toEqual(searchResult);
   });
 });

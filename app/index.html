@@ -152,7 +152,7 @@
 
             <!-- Create index bar -->
             <span class="create-index-wrapper input-group">
-                <select name="fileList" class="" id="file-list" ng-model="selectedFile">
+                <select name="fileList" id="file-list" ng-model="selectedFile">
                   <option value=''>Select a File</option>
                   <option ng-repeat="(fileName, fileContent) in fileObjects" placeholder="Select a book file">{{fileName}}</option>
                 </select>
@@ -165,7 +165,7 @@
             <span ng-show="allIndicies" class="search-form pull-right">
               <input class="search" type="text" placeholder="Search here" ng-model="query">
 
-              <select name="fileList" class="" id="file-list" ng-model="selectedFile">
+              <select name="fileList" id="file-list" ng-model="selectedFile">
                   <option value=''>All</option>
                   <option ng-repeat="(filename, fileContent) in allIndicies" placeholder="Select a book file">{{filename}}</option>
                 </select>
@@ -181,11 +181,11 @@
           <table ng-show="showIndex" ng-repeat="(fileName, val) in allIndicies" class="table table-striped">
               <thead>
                 <th>Term(s)</th>
-                <th ng-repeat="eachBook in val.numOfBook">Book {{eachBook+1}}</th>
+                <th ng-repeat="eachBook in val.totalBooks">Book {{eachBook+1}}</th>
               </thead>
               <tr ng-repeat="eachToken in val.uniqueWords">
                   <td>{{eachToken}}</td>
-                  <td ng-repeat="eachBook in val.numOfBook">
+                  <td ng-repeat="eachBook in val.totalBooks">
                     <img ng-src="img/{{ eachBook | iconCheck : val.indexed[eachToken]}}.png" width="20px" height="20px">
                   </td>
               </tr>
@@ -213,7 +213,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!--Custom scripts-->
-    <script src="js/app.js"></script>
+    <script src="js/invertedIndex.js"></script>
     <script src="js/mainModule.js"></script>
   </body>
 </html>

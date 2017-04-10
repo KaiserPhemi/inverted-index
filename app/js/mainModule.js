@@ -9,7 +9,7 @@ const invIndex = new InvertedIndex();
  * @return {Object}        [description]
  */
 const MainController = ($scope) => {
-  $scope.message = 'Please upload a valid .json file.';
+  $scope.message = 'Welcome. Please upload a valid .json file.';
   $scope.word = 'info';
   $scope.fileNames = [];
   $scope.fileObjects = {};
@@ -19,8 +19,8 @@ const MainController = ($scope) => {
     for (let count = 0; count < allUploads.files.length; count += 1) {
       const uploadedFile = allUploads.files[count],
         singleFileName = uploadedFile.name;
-      invIndex.readFile(uploadedFile).then((content) => {
-        if (!invIndex.validateFile(singleFileName, JSON.parse(content))) {
+      InvertedIndex.readFile(uploadedFile).then((content) => {
+        if (!InvertedIndex.validateFile(singleFileName, JSON.parse(content))) {
           $scope.$apply(() => {
             $scope.message = `${singleFileName} is not a valid .json file.`;
             $scope.word = 'danger';
@@ -47,8 +47,8 @@ const MainController = ($scope) => {
     $scope.showIndex = true;
     const fileContent = $scope.fileObjects[selectFile],
       fileName = selectFile;
+    $scope.allIndicies = {};
     if (invIndex.createIndex(fileName, fileContent)) {
-      $scope.allIndicies = {};
       const indexed = invIndex.getIndex(fileName),
         uniqueWords = Object.keys(indexed),
         totalBooks = $scope.getTotalBooks(fileName);
@@ -65,7 +65,6 @@ const MainController = ($scope) => {
     }
     $scope.message = 'No index created';
     $scope.word = 'info';
-    $scope.allIndicies = {};
   };
   /**
    * Function to get book count in a file
@@ -74,11 +73,11 @@ const MainController = ($scope) => {
    */
   $scope.getTotalBooks = (fileName) => {
     const fileContent = $scope.fileObjects[fileName],
-      arr = [];
+      array = [];
     for (let i = 0; i < fileContent.length; i += 1) {
-      arr.push(i);
+      array.push(i);
     }
-    return arr;
+    return array;
   };
   /**
    * Function to search through index created
@@ -87,13 +86,13 @@ const MainController = ($scope) => {
    * @return {Object}          Object containing search result
    */
   $scope.searchIndex = (fileName, query) => {
-    const fileArr = [];
+    const fileArray = [];
     const queriedWords = invIndex.tokenize(query).toString();
-    fileArr.push(fileName);
+    fileArray.push(fileName);
     if ($scope.createIndex) {
       $scope.showIndex = false;
       $scope.searchedIndices = {};
-      const searched = invIndex.searchIndex(fileArr, query),
+      const searched = invIndex.searchIndex(fileArray, query),
         books = Object.keys(searched),
         totalBooks = $scope.getTotalBooks(fileName);
       $scope.searchedIndices = {
@@ -113,8 +112,8 @@ const MainController = ($scope) => {
  * Function to handle icon display inside table
  * @return {String} String referencing and icon name.
  */
-const tableIcon = () => (input, arr) => {
-  if (arr.includes(input)) {
+const tableIcon = () => (input, array) => {
+  if (array.includes(input)) {
     return 'check';
   }
   return 'dash';
