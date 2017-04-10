@@ -1,13 +1,13 @@
-/* eslint-disable */
+
 /**
  * Dependencies declared globally
  */
-const InvertedIndex = require('../app/js/app.js'),
+const InvertedIndex = require('../app/js/invertedIndex.js'),
   invIndex = new InvertedIndex(),
-  badFormat = require('./books/bad-format.json'),
+  badFormat = require('./books/badFormat.json'),
   empty = require('./books/empty.json'),
-  book = require('./books/books.json'),
-  otherBook = require('./books/other-book.json');
+  book = require('./books/book.json'),
+  otherBook = require('./books/otherBook.json');
 /**
  * Test case for Class definition
  */
@@ -30,15 +30,15 @@ describe('Constructor', () => {
  */
 describe('validateFile', () => {
   it('should return `true` for valid json file', () => {
-    expect(invIndex.validateFile('books.json', book)).toBe(true);
+    expect(InvertedIndex.validateFile('books.json', book)).toBe(true);
   });
 
   it('should return `false` for empty files', () => {
-    expect(invIndex.validateFile('empty.json', empty)).toBe(false);
+    expect(InvertedIndex.validateFile('empty.json', empty)).toBe(false);
   });
 
   it('should return `false` for invalid file', () => {
-    expect(invIndex.validateFile('bad-format', badFormat)).toBe(false);
+    expect(InvertedIndex.validateFile('bad-format', badFormat)).toBe(false);
   });
 });
 /**
@@ -81,5 +81,24 @@ describe('getIndex method', () => {
       rabbit: [0] },
       bookCount: 1 };
     expect(invIndex.getIndex(otherBook)).toEqual(retObject.word);
+  });
+});
+/**
+ * Test case for searchIndex method
+ */
+describe('searchIndex method', () => {
+  it('should return a table of searched index from an index created', () => {
+    const retObject = { words: { alice: [0],
+        in: [0],
+        wonderland: [0],
+        a: [0],
+        falls: [0],
+        hole: [0],
+        into: [0],
+        rabbit: [0] },
+        bookCount: 1 },
+      query = 'in';
+    expect(invIndex.searchIndex(retObject.word, query))
+    .toEqual({ otherBook.json: { in: [0] } });
   });
 });
