@@ -145,6 +145,7 @@
     
     <!-- Main app page -->
     <div class="row">
+      
       <!-- Aside wrapper -->
       <div class="col-sm-2 aside bg-color shadow">
         <div> <!-- App info wrapper -->
@@ -183,7 +184,7 @@
             </span>
 
             <!-- Search index wrapper -->
-            <span ng-show="allIndices" class="search-form pull-right">
+            <span ng-show="indices" class="search-form pull-right">
               <input class="search" type="text" placeholder="Search here" ng-model="query">
 
               <select name="fileList" id="file-list" ng-model="selectedFile">
