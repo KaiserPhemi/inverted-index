@@ -6,16 +6,20 @@ const invertedIndex = new InvertedIndex();
 /**
  * Controller handling basic features of app
  * @param  {Object} $scope Binds the view with the controller
- * @return {Object}        [description]
+ * @return {Object}        Main app controller
  */
 const MainController = ($scope) => {
   $scope.message = 'Welcome. Please upload a valid .json file.';
   $scope.word = 'info';
   $scope.fileNames = [];
   $scope.fileObjects = {};
-  $scope.allIndices = {};
   $scope.indexedFiles = [];
   $scope.showIndex = true;
+  /**
+   * Function to handle file upload
+   * @param  {Object} event DOM object containing all uploads
+   * @return {Object}       Object containing all file object
+   */
   $scope.fileUpload = (event) => {
     const allUploads = event.target;
     for (let count = 0; count < allUploads.files.length; count += 1) {
@@ -44,7 +48,11 @@ const MainController = ($scope) => {
   };
   document.querySelector('#all-files')
   .addEventListener('change', $scope.fileUpload);
-
+  /**
+   * Functions to create index
+   * @param  {Object} selectFile Input object
+   * @return {Boolean}           True or false
+   */
   $scope.createIndex = (selectFile) => {
     $scope.showIndex = true;
     const fileContent = $scope.fileObjects[selectFile],
