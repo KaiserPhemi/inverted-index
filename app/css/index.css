@@ -93,7 +93,6 @@ option{
     height: 100%;
     font-size: 0.9em;
     float: left;
-    display: inline;
 }
 
 /* App wrapper */
@@ -103,7 +102,6 @@ option{
     top: 0;
     position: relative;
     width: auto;
-    display: inline;
 }
 
 /* control-wrapper */
@@ -204,11 +202,22 @@ option{
     margin-bottom: 5px;
 }
 
+/* HD desktop screen */
+@media screen and (max-width: 1240px) {
+    .app-wrapper {
+        margin: 0 auto;
+        top: 0;
+        position: relative;
+        width: auto;
+        display: inline;
+    }
+}
+
+/* Desktop screen */
 @media screen and (max-width: 920px) {
     .aside {
         width: 900px;
         margin: 0 auto;
-        float: none;
     }
 
     .msg-bar {
@@ -225,8 +234,12 @@ option{
 
 }
 
+/* Smartphone screen */
 @media screen and (max-width: 767px) {
 
 }
 
-@media screen and (max-width: 375px)
+/* Small phone screen */
+@media screen and (max-width: 375px) {
+    
+}
