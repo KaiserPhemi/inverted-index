@@ -2,7 +2,7 @@
  * Instance of class created
  * @type Object
  */
-const invIndex = new InvertedIndex();
+const invertedIndex = new InvertedIndex();
 /**
  * Controller handling basic features of app
  * @param  {Object} $scope Binds the view with the controller
@@ -13,6 +13,8 @@ const MainController = ($scope) => {
   $scope.word = 'info';
   $scope.fileNames = [];
   $scope.fileObjects = {};
+  $scope.allIndices = {};
+  $scope.indexedFiles = [];
   $scope.showIndex = true;
   $scope.fileUpload = (event) => {
     const allUploads = event.target;
@@ -47,22 +49,25 @@ const MainController = ($scope) => {
     $scope.showIndex = true;
     const fileContent = $scope.fileObjects[selectFile],
       fileName = selectFile;
-    $scope.allIndicies = {};
-    if (invIndex.createIndex(fileName, fileContent)) {
-      const indexed = invIndex.getIndex(fileName),
+    $scope.indices = {};
+    if (invertedIndex.createIndex(fileName, fileContent)) {
+      const indexed = invertedIndex.getIndex(fileName),
         uniqueWords = Object.keys(indexed),
         totalBooks = $scope.getTotalBooks(fileName);
-      $scope.allIndicies[fileName] = {
+      $scope.indices[fileName] = {
         uniqueWords,
         totalBooks,
         indexed
       };
+
+      $scope.indexedFiles.push(fileName);
     }
-    if ($scope.allIndicies[fileName]) {
+    if ($scope.indices[fileName]) {
       $scope.message = `Index created for ${fileName}`;
       $scope.word = 'success';
       return true;
     }
+
     $scope.message = 'No index created';
     $scope.word = 'info';
   };
@@ -86,21 +91,31 @@ const MainController = ($scope) => {
    * @return {Object}          Object containing search result
    */
   $scope.searchIndex = (fileName, query) => {
+    if (typeof query === 'undefined' || query.length === 0
+      || !$scope.createIndex) {
+      $scope.message = `Please create an index first
+       and input a search token/word.`;
+      $scope.word = 'warning';
+    }
     const fileArray = [];
-    const queriedWords = invIndex.tokenize(query).toString();
+    const queriedWords = invertedIndex.tokenize(query).toString();
     fileArray.push(fileName);
     if ($scope.createIndex) {
       $scope.showIndex = false;
       $scope.searchedIndices = {};
-      const searched = invIndex.searchIndex(fileArray, query),
-        books = Object.keys(searched),
-        totalBooks = $scope.getTotalBooks(fileName);
-      $scope.searchedIndices = {
-        books,
-        totalBooks,
-        searched
-      };
+      const searched = invertedIndex.searchIndex(fileArray, query),
+        books = Object.keys(searched);
+      books.forEach((bookName) => {
+        const totalBooks = $scope.getTotalBooks(bookName);
+        const result = searched[bookName];
+        $scope.searchedIndices[bookName] = {
+          totalBooks,
+          result
+        };
+      });
     }
+    $scope.message = 'Kindly create an index before searching';
+    $scope.word = 'warning';
     if ($scope.searchedIndices) {
       $scope.message = `Search Index created for word(s) '${queriedWords}'`;
       $scope.word = 'success';
