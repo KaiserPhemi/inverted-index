@@ -1,32 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>JSDoc: Source: app.js</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
-</head>
-
-<body>
-
-<div id="main">
-
-    <h1 class="page-title">Source: app.js</h1>
-
-    
-
-
-
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
+/**
  * @class InvertedIndex
  */
 class InvertedIndex {
@@ -42,15 +14,14 @@ class InvertedIndex {
    * @param  {File} file - Uploaded file to be read.
    * @return {void}
    */
-  readFile(file) {
-    this.file = file;
+  static readFile(file) {
     return new Promise((resolve, reject) => {
       const bookReader = new FileReader();
-      bookReader.onload = evt => resolve(evt.target.result);
-      bookReader.onerror = (evt) => {
-        reject(`Error reading + ${this.file.name}: ${evt.target.result}`);
+      bookReader.onload = event => resolve(event.target.result);
+      bookReader.onerror = (event) => {
+        reject(`Error reading + ${this.file.name}: ${event.target.result}`);
       };
-      bookReader.readAsText(this.file);
+      bookReader.readAsText(file);
     });
   }
   /**
@@ -59,14 +30,12 @@ class InvertedIndex {
    * @param  {Object} fileContent
    * @return {Boolean} isValid -True or false
    */
-  validateFile(fileName, fileContent) {
-    this.content = fileContent;
-    this.fileName = fileName;
+  static validateFile(fileName, fileContent) {
     let isValid = true;
     try {
-      const parsed = JSON.parse(JSON.stringify(this.content));
-      isValid = (parsed.length &lt;= 0) ||
-      (!this.fileName.toLowerCase().match(/\.json$/g)) ? false : isValid;
+      const parsed = JSON.parse(JSON.stringify(fileContent));
+      isValid = (parsed.length <= 0) ||
+      (!fileName.toLowerCase().match(/\.json$/g)) ? false : isValid;
       parsed.forEach((key) => {
         if (typeof key.title !== 'string' || typeof key.text !== 'string') {
           isValid = false;
@@ -82,13 +51,12 @@ class InvertedIndex {
    * @param  {String} fileText - String from file to be tokenized
    * @return {Array} An array of unique words
    */
-  tokenize(fileText) {
-    this.text = fileText;
-    return [...new Set(this.text
-              .toLowerCase()        // Converts text to lower case
-              .replace(/[^\w\s]/g, '')  // Removes any non-word character
-              .split(/\s+/)       // Turns it into an array
-              .sort()           // Sorts array
+  static tokenize(fileText) {
+    return [...new Set(fileText
+              .toLowerCase()
+              .replace(/[^\w\s]/g, '')
+              .split(/\s+/)
+              .sort()
     )];
   }
   /**
@@ -99,11 +67,11 @@ class InvertedIndex {
    */
   createIndex(fileName, content) {
     const fileIndex = {};
-    if (this.validateFile(fileName, content)) {
-      content.forEach((objDoc, index) => {
-        Object.keys(objDoc).forEach((key) => {
-          if (Object.prototype.hasOwnProperty.call(objDoc, key)) {
-            const tokens = this.tokenize(objDoc[key]);
+    if (InvertedIndex.validateFile(fileName, content)) {
+      content.forEach((fileContent, index) => {
+        Object.keys(fileContent).forEach((key) => {
+          if (Object.prototype.hasOwnProperty.call(fileContent, key)) {
+            const tokens = InvertedIndex.tokenize(fileContent[key]);
             tokens.forEach((token) => {
               if (fileIndex[token]) {
                 if (fileIndex[token].indexOf(index) === -1) {
@@ -130,18 +98,18 @@ class InvertedIndex {
   }
   /**
    * Searches through one or more indices for words
-   * @param  {String} fileArr -File array
+   * @param  {String} fileArray -Input file array
    * @param  {String} query -Input token
    * @return {Object} searchResult
    */
-  searchIndex(fileArr, query) {
+  searchIndex(fileArray, query) {
     let index;
     this.searchIndices = {};
-    const tokenized = this.tokenize(query);
-    if (!fileArr) {
-      fileArr = Object.keys(this.allIndices);
+    const tokenized = InvertedIndex.tokenize(query);
+    if (fileArray[0] === '') {
+      fileArray = Object.keys(this.allIndices);
     }
-    fileArr.forEach((fileName) => {
+    fileArray.forEach((fileName) => {
       const searchResult = {};
       index = this.allIndices[fileName];
       tokenized.forEach((word) => {
@@ -160,26 +128,3 @@ class InvertedIndex {
 if (typeof window === 'undefined') {
   module.exports = InvertedIndex;
 }
-</code></pre>
-        </article>
-    </section>
-
-
-
-
-</div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="InvertedIndex.html">InvertedIndex</a></li></ul>
-</nav>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sun Apr 09 2017 16:36:41 GMT+0100 (WAT)
-</footer>
-
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
-</body>
-</html>
